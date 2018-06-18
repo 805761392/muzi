@@ -1,0 +1,48 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">优惠券自动发放</div>
+<div class="panel-body">
+    <a class="btn btn-primary mb-3" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fcoupon%2Fauto-send-edit">添加自动发放方案</a>
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>触发事件</th>
+            <th>优惠券</th>
+            <th>发放次数限制</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+                </table>
+</div>
+</div>
+<script>
+$(document).on("click", ".delete-confirm", function () {
+    var url = $(this).attr("href");
+    $.myConfirm({
+        content: "确认删除？",
+        confirm: function () {
+            $.myLoading();
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (res) {
+                    if (res.code == 0) {
+                        location.reload();
+                    } else {
+                        $.myLoadingHide();
+                        $.myAlert({
+                            content: res.msg,
+                        });
+                    }
+                }
+            });
+        },
+    });
+    return false;
+});
+</script>    </div>
+</div>
+{/block}

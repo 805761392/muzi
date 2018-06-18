@@ -1,0 +1,59 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>打印机管理</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fprinter%2Fedit">添加打印机</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fprinter%2Fsetting">打印设置</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>打印机名称</th>
+            <th>打印机品牌</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+                    </tbody>
+    </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+</div>
+</div>
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    $.confirm({
+        content: a.data('content'),
+        confirm: function () {
+            $.ajax({
+                url: a.data('url'),
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.alert({
+                            title: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>
+{/block}

@@ -1,0 +1,575 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="./index.php?c=site&a=entry&op=list&do=merchant&m=xfydm_wuzhe">
+                商家列表
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=add&do=merchant&m=xfydm_wuzhe">
+                添加商家
+            </a>
+        </li>
+        <!-- <li><a href="./index.php?c=site&a=entry&op=wuzhe&do=merchant&m=xfydm_wuzhe">今日五折商家列表</a></li>
+        <li ><a href="./index.php?c=site&a=entry&op=addwuzhe&do=merchant&m=xfydm_wuzhe">添加今日五折商家</a></li>
+        <li ><a href="./index.php?c=site&a=entry&op=mingdian&do=merchant&m=xfydm_wuzhe">名店推荐列表</a></li>
+        <li ><a href="./index.php?c=site&a=entry&op=addmingdian&do=merchant&m=xfydm_wuzhe">添加名店推荐商家</a></li> -->
+    </ul>
+    <div class="main">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                筛选
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" action="" method="POST">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            商家名字
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input class="form-control" name="name" type="text" value="" placeholder="">
+                            <input class="form-control" name="shuaxin" type="text" value="1" style="display: none">
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="submit" class="btn btn-default" name="update" value="搜索">
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="category">
+            <div class="panel panel-default">
+                <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;width:150px;">
+                                    商家名字
+                                </th>
+                                <th style="text-align: center;width:80px;">
+                                    商家类型
+                                </th>
+                                <th style="text-align: center;width:150px;">
+                                    地址
+                                </th>
+                                <th style="text-align: center;width:60px;">
+                                    积分余额
+                                </th>
+                                <th style="text-align: center;width: 120px">
+                                    添加时间
+                                </th>
+                                <th style="text-align: center;width: 200px">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align:center;">
+                                <td>
+                                    <div class="type-parent" style="">
+                                        禄喜记
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        美食
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        柳州市柳北区北雀路43号香颂e公馆4号楼3楼
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        1000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        2018-06-12 11:27:30
+                                    </div>
+                                </td>
+                                <td style="">
+                                    <a href="./index.php?c=site&a=entry&op=updata&id=81&do=merchant&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            修改
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=list&did=81&do=taocan&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            套餐列表
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=shop&did=81&do=integral&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            积分商城
+                                        </button>
+                                    </a>
+                                    <!-- <button class="btn btn-warning" onclick="cz(81)"><span class="glyphicon glyphicon-cog"></span>积分充值</button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@mdo" onclick="cz_id(81,1000)">
+                                        积分充值
+                                    </button>
+                                    <!--<a href="./index.php?c=site&a=entry&op=del&id=81&do=merchant&m=xfydm_wuzhe"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>删除</button></a>-->
+                                    <a href="javascript:delplayer(81)">
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr style="text-align:center;">
+                                <td>
+                                    <div class="type-parent" style="">
+                                        牛轩升·牛肉饭
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        美食
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        柳州市城中区东环大道256号万达广场东街8栋2楼42号（3号门那些年餐厅对面）
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        1000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        2018-06-12 17:54:51
+                                    </div>
+                                </td>
+                                <td style="">
+                                    <a href="./index.php?c=site&a=entry&op=updata&id=82&do=merchant&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            修改
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=list&did=82&do=taocan&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            套餐列表
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=shop&did=82&do=integral&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            积分商城
+                                        </button>
+                                    </a>
+                                    <!-- <button class="btn btn-warning" onclick="cz(82)"><span class="glyphicon glyphicon-cog"></span>积分充值</button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@mdo" onclick="cz_id(82,1000)">
+                                        积分充值
+                                    </button>
+                                    <!--<a href="./index.php?c=site&a=entry&op=del&id=82&do=merchant&m=xfydm_wuzhe"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>删除</button></a>-->
+                                    <a href="javascript:delplayer(82)">
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr style="text-align:center;">
+                                <td>
+                                    <div class="type-parent" style="">
+                                        渝园蜀香
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        美食
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        城中区城中区瑞安路2号恒隆汇2楼（肯德基楼上）
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        1000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        2018-06-15 10:53:28
+                                    </div>
+                                </td>
+                                <td style="">
+                                    <a href="./index.php?c=site&a=entry&op=updata&id=83&do=merchant&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            修改
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=list&did=83&do=taocan&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            套餐列表
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=shop&did=83&do=integral&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            积分商城
+                                        </button>
+                                    </a>
+                                    <!-- <button class="btn btn-warning" onclick="cz(83)"><span class="glyphicon glyphicon-cog"></span>积分充值</button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@mdo" onclick="cz_id(83,1000)">
+                                        积分充值
+                                    </button>
+                                    <!--<a href="./index.php?c=site&a=entry&op=del&id=83&do=merchant&m=xfydm_wuzhe"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>删除</button></a>-->
+                                    <a href="javascript:delplayer(83)">
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr style="text-align:center;">
+                                <td>
+                                    <div class="type-parent" style="">
+                                        中国电信
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        休闲娱乐,优惠折扣
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        柳南区鹅山路39号站前馨印象108号门面中国电信营业厅
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        1000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        2018-06-08 09:57:07
+                                    </div>
+                                </td>
+                                <td style="">
+                                    <a href="./index.php?c=site&a=entry&op=updata&id=80&do=merchant&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            修改
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=list&did=80&do=taocan&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            套餐列表
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=shop&did=80&do=integral&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            积分商城
+                                        </button>
+                                    </a>
+                                    <!-- <button class="btn btn-warning" onclick="cz(80)"><span class="glyphicon glyphicon-cog"></span>积分充值</button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@mdo" onclick="cz_id(80,1000)">
+                                        积分充值
+                                    </button>
+                                    <!--<a href="./index.php?c=site&a=entry&op=del&id=80&do=merchant&m=xfydm_wuzhe"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>删除</button></a>-->
+                                    <a href="javascript:delplayer(80)">
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr style="text-align:center;">
+                                <td>
+                                    <div class="type-parent" style="">
+                                        丸龟制面
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        优惠折扣,美食
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        武汉市洪山区珞喻路6号群光广场B1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        1000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="">
+                                        2018-06-01 12:17:37
+                                    </div>
+                                </td>
+                                <td style="">
+                                    <a href="./index.php?c=site&a=entry&op=updata&id=79&do=merchant&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            修改
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=list&did=79&do=taocan&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            套餐列表
+                                        </button>
+                                    </a>
+                                    <a href="./index.php?c=site&a=entry&op=shop&did=79&do=integral&m=xfydm_wuzhe">
+                                        <button class="btn btn-warning">
+                                            <span class="glyphicon glyphicon-cog">
+                                            </span>
+                                            积分商城
+                                        </button>
+                                    </a>
+                                    <!-- <button class="btn btn-warning" onclick="cz(79)"><span class="glyphicon glyphicon-cog"></span>积分充值</button> -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                    data-whatever="@mdo" onclick="cz_id(79,1000)">
+                                        积分充值
+                                    </button>
+                                    <!--<a href="./index.php?c=site&a=entry&op=del&id=79&do=merchant&m=xfydm_wuzhe"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>删除</button></a>-->
+                                    <a href="javascript:delplayer(79)">
+                                        <button class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash">
+                                            </span>
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                        <h4 class="modal-title" id="exampleModalLabel">
+                            积分充值
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group int">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                                    变化
+                                </label>
+                                <div class="col-sm-6 col-lg-6 col-xs-12">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="bh" class="bh" id="inlineRadio1" value="1" onclick="bh_btn(1)">
+                                        增加
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="bh" class="bh" id="inlineRadio2" value="2" onclick="bh_btn(2)">
+                                        减少
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="bh" class="bh" id="inlineRadio2" value="3" onclick="bh_btn(3)">
+                                        最终积分
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label" style="font-size:13px;">
+                                    充值数目
+                                </label>
+                                <div class="col-sm-6 col-lg-6 col-xs-12">
+                                    <input class="form-control bh_num" name="bh_num" type="text" value=""
+                                    placeholder="">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="bh_val" class="bh_val" value="">
+                        <input type="hidden" name="hx_id" class="hx_id" value="">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="cz_sub()">
+                            确定充值
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function bh_btn(ss) {
+                $(".bh_val").val(ss);
+            }
+            function cz_id(id, int) {
+                $(".hx_id").val(id);
+                var ints = "当前积分：" + int $(".int").html(ints);
+            }
+            function cz_sub(id) {
+                var id = $(".hx_id").val();
+                var bh = $(".bh_val").val();
+                var bh_num = $(".bh_num").val();
+                if (bh_num == null || bh_num == "") {
+                    alert("充值积分不能为空");
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "./index.php?c=site&a=entry&do=chongzhi&m=xfydm_wuzhe",
+                        data: {
+                            id: id,
+                            bh: bh,
+                            bh_num: bh_num
+                        },
+                        success: function(data) {
+                            var res = eval("(" + data + ")");
+                            if (res.data == 0) {
+                                util.message('操作成功', location.href, 'success');
+                            } else {
+                                util.message('操作失败, 请稍后重试.');
+                            }
+                        }
+                    },
+                    'json');
+                }
+            }
+        </script>
+    </div>
+    <script type="text/javascript">
+        function delplayer(id) {
+            var alt = confirm("删除商家！");
+            if (alt) {
+                $.post("./index.php?c=site&a=entry&op=del&do=merchant&m=xfydm_wuzhe", {
+                    id: id
+                },
+                function(res) {
+                    if (res.data != 0) {
+                        util.message('操作失败, 请稍后重试.')
+                    } else {
+                        util.message('操作成功', location.href, 'success');
+                    }
+                },
+                'json');
+            }
+        }
+        function delwuzhe(id) {
+            var alt = confirm("删除商家！");
+            if (alt) {
+                $.post("./index.php?c=site&a=entry&op=wuzhedel&do=merchant&m=xfydm_wuzhe", {
+                    id: id
+                },
+                function(res) {
+                    if (res.data != 0) {
+                        util.message('操作失败, 请稍后重试.')
+                    } else {
+                        util.message('操作成功', location.href, 'success');
+                    }
+                },
+                'json');
+            }
+        }
+        function delmingdin(id) {
+            var alt = confirm("删除商家！");
+            if (alt) {
+                $.post("./index.php?c=site&a=entry&op=mingdiandel&do=merchant&m=xfydm_wuzhe", {
+                    id: id
+                },
+                function(res) {
+                    if (res.data != 0) {
+                        util.message('操作失败, 请稍后重试.')
+                    } else {
+                        util.message('操作成功', location.href, 'success');
+                    }
+                },
+                'json');
+            }
+        }
+    </script>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        function search() {
+            var key = $(".key").val();
+            $.post("./index.php?c=site&a=entry&do=sj_sea&m=xfydm_wuzhe", {
+                name: key
+            },
+            function(res) {
+                $(".sj_id").val(res.data.id);
+                $(".names").val(res.data.name);
+                $(".addresss").val(res.data.address);
+            },
+            'json');
+        }
+    </script>
+    <script type="text/javascript">
+        function searchs() {
+            var key = $(".key").val();
+            $.post("./index.php?c=site&a=entry&do=md_sea&m=xfydm_wuzhe", {
+                name: key
+            },
+            function(res) {
+                $(".sj_id").val(res.data.id);
+                $(".names").val(res.data.name);
+                $(".addresss").val(res.data.address);
+            },
+            'json');
+        }
+    </script>
+    <script type="text/javascript">
+        function addpic() {
+            var html = document.getElementById("pics").innerHTML;
+            $(".yc").before(html);
+        }
+    </script>
+</div>
+{/block}

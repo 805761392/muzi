@@ -1,0 +1,280 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+     <div class="panel mb-3">
+ <div class="panel-header">核销员管理</div>
+ <div class="panel-body">
+     <div class="float-left pt-2">
+         <a class="btn btn-primary" href="javascript:" data-toggle="modal" data-target="#edit"
+            data-backdrop="static">添加核销员</a>
+     </div>
+     <div class="float-right mb-4">
+         <form method="get">
+
+                                                 <input type="hidden" name="r" value="mch/user/clerk">
+
+             <div class="input-group">
+                 <input class="form-control"
+                        placeholder="微信昵称"
+                        name="keyword"
+                        autocomplete="off"
+                        value="">
+                 <span class="input-group-btn">
+                 <button class="btn btn-primary">搜索</button>
+             </span>
+             </div>
+         </form>
+     </div>
+     <table class="table table-bordered bg-white">
+         <thead>
+         <tr>
+             <th>ID</th>
+             <th>头像</th>
+             <th>昵称</th>
+             <th>所属门店</th>
+             <th>加入时间</th>
+             <th>身份</th>
+             <th>核销订单数</th>
+             <th>核销总额</th>
+             <th>核销卡券数</th>
+             <th>操作</th>
+         </tr>
+         </thead>
+                 </table>
+     <div class="text-center">
+                     <div class="text-muted">0条数据</div>
+     </div>
+     <div id="app">
+         <!-- 设置核销员 -->
+         <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">设置核销员</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="form-group row">
+                             <div class="col-3 text-right">
+                                 <label class="col-form-label required">门店选择</label>
+                             </div>
+                             <div class="col-9">
+                                 <template v-if="shop_list.length>0">
+                                     <div class="dropdown">
+                                         <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                 id="dropdownMenuButton"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             {{select_shop.name}}
+                                         </button>
+                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                              style="max-height: 200px;overflow-y: auto">
+                                             <a class="dropdown-item shop-select" href="javascript:"
+                                                v-for="(item,index) in shop_list"
+                                                :data-index="index">{{item.name}}</a>
+                                         </div>
+                                     </div>
+                                     <div class="shop-error text-danger" hidden></div>
+                                 </template>
+                                 <template v-else>
+                                     <label class="col-form-label">暂未设置门店，<a
+                                             href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fshop">请前往设置</a></label>
+                                 </template>
+                             </div>
+                         </div>
+                         <template v-if="shop_list.length>0">
+                             <div class="form-group">
+                                 <div class="input-group">
+                                     <input class="form-control keyword" placeholder="输入微信昵称查找">
+                                     <input class="form-control order-id" type="hidden">
+                         <span class="input-group-btn">
+                                 <button v-on:click="showKeyword()" class="btn btn-info">
+                                     查找
+                                 </button>
+                             </span>
+                                 </div>
+                             </div>
+                             <div style="max-height:400px;overflow: auto">
+                                 <table class="table table-bordered">
+                                     <tr v-for="(item,index) in show_user_list">
+                                         <td>{{item.id}}</td>
+                                         <td>{{item.nickname}}</td>
+                                         <td>
+                                             <a class="btn btn-primary btn-sm send" href="javascript:"
+                                                data-url="/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Fclerk-edit&status=1"
+                                                :data-index="item.id">设为核销员</a>
+                                         </td>
+                                     </tr>
+                                 </table>
+                             </div>
+                         </template>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!--修改门店-->
+         <div class="modal fade" id="shop-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true" data-backdrop="static">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">设置核销员</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="form-group row">
+                             <div class="col-3 text-right">
+                                 <label class="col-form-label required">门店选择</label>
+                             </div>
+                             <div class="col-9">
+                                 <template v-if="shop_list.length>0">
+                                     <div class="dropdown">
+                                         <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                 id="dropdownMenuButton"
+                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             {{select_shop.name}}
+                                         </button>
+                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                              style="max-height: 200px;overflow-y: auto">
+                                             <a class="dropdown-item shop-select" href="javascript:"
+                                                v-for="(item,index) in shop_list"
+                                                :data-index="index">{{item.name}}</a>
+                                         </div>
+                                     </div>
+                                     <div class="shop-error text-danger" hidden></div>
+                                 </template>
+                                 <template v-else>
+                                     <label class="col-form-label">暂未设置门店，<a
+                                             href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fshop">请前往设置</a></label>
+                                 </template>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="modal-footer">
+                         <a class="btn btn-primary send" href="javascript:"
+                            data-url="/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Fclerk-edit&status=1&edit=1"
+                            :data-index="edit_user_id">提交</a>
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+</div>
+<script>
+ var app = new Vue({
+     el: "#app",
+     data: {
+         user_list:[{"id":"324","type":"1","username":"obEXM4owokdr1RZl7nxAaYKDlqUo","password":"$2y$05$zZpY.guVN0GOvYgd8qGNdOaAIt.1sVLpG5karNBG\/fptcJloG5D7m","auth_key":"bQV8YFENIHh411p00fYIGwcgezSJ3qJD","access_token":"Ru3YgEku24nO1UOZJkdlQZzATmv4CjQR","addtime":"1528426771","is_delete":"0","wechat_open_id":"obEXM4owokdr1RZl7nxAaYKDlqUo","wechat_union_id":"","nickname":"爱丽","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/oSr9SBRMGNzCc6krRAzT8edI4C8IfQgEGpfI1rjrJJONeC0vONMLwGibN9btm6NyaCMZpiaKdO3Sd4HhbEUpaBVg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"323","type":"1","username":"obEXM4srpHR5x6K5rNT-zJnmeM9E","password":"$2y$05$qwVbnHl.oUSav7iyYB9HquNl8McfqeqO8yRazd6v67P9CcS8YVo.6","auth_key":"ZExmazC3yA3hoNLHBw9ALM0wJ7UUGC2Z","access_token":"TR-9lBP5fUO6OKBgaIGKz_o7Jd6siAod","addtime":"1528426509","is_delete":"0","wechat_open_id":"obEXM4srpHR5x6K5rNT-zJnmeM9E","wechat_union_id":"","nickname":"幻点科技coco","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/l1Cic50masSye3m1KfsRb3BzpuUBp7hPGcULFykkcicbHTT4O7m5qdoichSiaK2lIaDoSjral7xuib30Z4atBQD0N7g\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"322","type":"1","username":"obEXM4r3j3RRrar4kjlbPRrrdlcw","password":"$2y$05$wq2QSzSC4ausVg6yXyQANOFNpL21yqNODVVGgCDDefGYIrWkIc5w2","auth_key":"RnMoGKcUx5fYikr6uVWQFn8--YNTBYQL","access_token":"oDg7PsHOl9EOJOlgCvIFncF0KAdYCqZB","addtime":"1528426482","is_delete":"0","wechat_open_id":"obEXM4r3j3RRrar4kjlbPRrrdlcw","wechat_union_id":"","nickname":"莺子13607726619","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/BiblaKjthHdxVeXhxHRgHI0EuNaBuOwVLiboMdeeaS6RGn0ABjiacCKZVhbyLC1BREAGbjzbT1DuWDqZsYL2tQVEg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"321","type":"1","username":"obEXM4umvCvT_kTRbuxf5Vec4DqI","password":"$2y$05$z.zoXYKD.5NTLLwx3dYu3uUJ4QRmGHVssQQkGp.\/jmw8o2HLYZO1u","auth_key":"Yb4zEMNnlWJirVU45rXQLWrofPDYPBNO","access_token":"WeJSAm78XwwOmp8IiVnokHQePra3GUZY","addtime":"1528426346","is_delete":"0","wechat_open_id":"obEXM4umvCvT_kTRbuxf5Vec4DqI","wechat_union_id":"","nickname":"honey","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83eoGibMsic1NCx5oNde7xDDsWcSoIiaOwyEgNR3CqJfWr9HYJlX72GDaCdbrMSYFE10yI89l9e4icOaDaQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"320","type":"1","username":"obEXM4lv66zljtn4k-OFOrXzzM94","password":"$2y$05$czfY5mb797eR8gbAiP\/XROilaWiV8.tWUVJO51z3.BfErH\/SSHVYu","auth_key":"vVwIQumWgNWXz9TIFkQS79XJk8PqUimC","access_token":"HZ6ff3ud95cgKt9l7T6kl994GlSnCjER","addtime":"1528426056","is_delete":"0","wechat_open_id":"obEXM4lv66zljtn4k-OFOrXzzM94","wechat_union_id":"","nickname":"YuHaoP","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/qDGaepQZOiaibXqIm4F0foNxibcdibuqYwjkmYsAdxo3sdD1dBCibpjJSs9uU7icCK0kicVRhVictRVWcdLE5Bn64hOyYg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"318","type":"1","username":"obEXM4k93OI_LSUSYtyOEarvLcvs","password":"$2y$05$k0bpdk\/PtbGrZ94QS.6jj.CsEf2zcmKJe1ZwSb\/WOoQQ2u1HnQP\/m","auth_key":"xolsEAjQEQwgxnLhildYL12KYUEPXwos","access_token":"61T2fe6WvM_LokBRDE67Gwd8MJzqMnpd","addtime":"1528379641","is_delete":"0","wechat_open_id":"obEXM4k93OI_LSUSYtyOEarvLcvs","wechat_union_id":"","nickname":"kcilcarus","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIZw3VfpHQlz2xv25Av81AQXVRYjX91BG7zdKKHibrtx8bmR9A9luiblDIkXcXIjqcJNvZpe7ASjLhg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"317","type":"1","username":"obEXM4qGvVCt1-Scw3WejWanOsMM","password":"$2y$05$YRyVnV4mOPlOL9YHNSMHJuvkKR37qjCbeJbbPl6m\/anCC2jAHau0G","auth_key":"XI_sqQOyilF9ptR_vKAnPK_4tgKN2C32","access_token":"xQ5vuQzUlgZFivekxat91wa6PN51KUBx","addtime":"1528372903","is_delete":"0","wechat_open_id":"obEXM4qGvVCt1-Scw3WejWanOsMM","wechat_union_id":"","nickname":"卡卡想知道","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTKrSZnqKEictdicaTpk2oibgYhDRdfhR4IbR4Q6jnkGcYOj0tPibV68csDjRlKR4Be2EHZuicE0bF4Gpew\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"314","type":"1","username":"obEXM4ja0FONQxY7k8_u2RRP50lA","password":"$2y$05$\/aLKWmByPuj\/uAMdFxlIReNEUU8L3zNvmuygiNjMNZ2K7BNeBFfIu","auth_key":"7AGfCg_MRLmC_hgMeUl_dIglpa3eSVhh","access_token":"h6sFV9pVdIJ_Jc8209d0A3lYKGxPTBG7","addtime":"1528345502","is_delete":"0","wechat_open_id":"obEXM4ja0FONQxY7k8_u2RRP50lA","wechat_union_id":"","nickname":"风猫","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTJRmN2LQ0g82IDXetk226eHJzQZ13P4Ng5WsH5ow7ibuQFxeKNncFkcwDzCSozAOwuNFNgJibo7mibYg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"313","type":"1","username":"obEXM4vMhpRNZyzyYIkoHDaLHwaE","password":"$2y$05$EHoK74IkxWruQaDpjTkCn.AFnylKTvtq.aHjlPlHuubNq.dEA2buu","auth_key":"pczH71VxOQ7m1X2xz10B9oF-nDU3ae3D","access_token":"PR1JBnfY1Kd2YXWLyNbPlxKABssC04WZ","addtime":"1528343769","is_delete":"0","wechat_open_id":"obEXM4vMhpRNZyzyYIkoHDaLHwaE","wechat_union_id":"","nickname":"风猫","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIhJR4XUtK5tkNibibOqPNicq2llicIP7PZyiag8W7cynLHnIvYzdibpvNC2bdKRouicmXXfnp1icBjxUPf1Q\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"306","type":"1","username":"obEXM4mUXC0PFyn1QTZCyzPigZyw","password":"$2y$05$NLDfC4FuW7xaQesVxcDjSePjSvIZTUGLszsfnKic\/e25aiIvH1AXG","auth_key":"slMqEhDSxyDG2W2opfyRAIzhc4G9f__1","access_token":"uCj-gaa18IyljmlS3ToCGNLDjwWFj1_q","addtime":"1527933734","is_delete":"0","wechat_open_id":"obEXM4mUXC0PFyn1QTZCyzPigZyw","wechat_union_id":"","nickname":"AAA新潮流(江丽)","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIAXY5ofBqTZQItC06HKrWyFu1msMkxaic0EaYKO9VmAeox3AeKnOiayDZMibNVT8vVicBs8V4h7kaCXQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"304","type":"1","username":"obEXM4j1e0tU6q1s-So0czFN61vk","password":"$2y$05$iCRwDAofXnebKeXiOFkA4e8OfKtDRG8tGsDsHK3ptxSc648a3lBbG","auth_key":"3XI-H8FlTKV9xxlNP_axMqlkOrX7DmvO","access_token":"KqKQRepKuhRjWd64U_5X5nbiPHafWeqt","addtime":"1527825643","is_delete":"0","wechat_open_id":"obEXM4j1e0tU6q1s-So0czFN61vk","wechat_union_id":"","nickname":"振霆","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DQSEXQCxt36BHI7LbyI27gXVwYKZDLNFF1pXcoUt1wJVpwkJ14T9EXYQlyWiccicNKwpfiaKa3sQJiaCZBgjBbSHqQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"302","type":"1","username":"obEXM4uuhkLUJXvmZFVrDlvXTksY","password":"$2y$05$DFdp2.Us\/Vmt6RrOFvsfWeVZ2YuJ42Yvx4ztfXJSteMsoA4FYbFue","auth_key":"5IuP6X6jMibFd0gUFxra17J9uIkJMkia","access_token":"_y1jS6zJTcAwCEHTuvT9AHz-KZMLf09h","addtime":"1527745417","is_delete":"0","wechat_open_id":"obEXM4uuhkLUJXvmZFVrDlvXTksY","wechat_union_id":"","nickname":"☀杰佬銧","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/WAKyVtSjxnS92bVSHgBdaYmAb770PKyRibPclJD5icU7PwYZ2heecgzpmDkHQx79ciaBzTURHyGjmTrtZYQxrOtvw\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"301","type":"1","username":"obEXM4gchb_YJBMZlQmBc5InkN3A","password":"$2y$05$fva4.k4rVx0c\/g0Bd8Bq0usnePgic6DEckRG5SA4EFsRyMyxK4MIS","auth_key":"7tZ84l0SsJNqpgMs2NgGyKBK_rqgCTCi","access_token":"lCFyem-r3akUpyi_Qgutdrz5y-toHo_D","addtime":"1527735618","is_delete":"0","wechat_open_id":"obEXM4gchb_YJBMZlQmBc5InkN3A","wechat_union_id":"","nickname":"青菜","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/waJJ2Xk7F61iaIeuvufFobbekONbFic4XuJ4xuKyDBeRT3HtGjogAOzj7fPGrzZSYkbp73QUsL0R7DNN3LHibpGdA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"298","type":"1","username":"obEXM4udfoQuZBSe3MlYSHWemOAo","password":"$2y$05$qVyS\/A\/bwVU0otJNs\/NEd.EjWDER.opPhI2QSRZ2MGBztcXScv.E2","auth_key":"7SNFPqu0chK3uG4DwsgVBVF-FEVklPBu","access_token":"cjqN7VaUIwovonN1j7epkW5jbvCwE5Tq","addtime":"1527644251","is_delete":"0","wechat_open_id":"obEXM4udfoQuZBSe3MlYSHWemOAo","wechat_union_id":"","nickname":"ahowei","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTLDhEzLKBOsstic9yVmyhQ4fB2WDNGibS4YfKcJfbKwphNVDThfFoXc6zEpkysCicrrH29d3Q2zdwzDg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"297","type":"1","username":"obEXM4lHYquYY4Co7dqGdBM4QGJQ","password":"$2y$05$nUEE2P6er\/ytBPQlvDwT5uU8Y\/hs6k1PrbP7JTe\/Tu04CAkKm.BZ.","auth_key":"mLCNiShvfFeB1Ca6uq1WjVVu8S5byP9C","access_token":"vftYQiLp3h7ouYtB6siCg34Q9S7eXn0A","addtime":"1527644012","is_delete":"0","wechat_open_id":"obEXM4lHYquYY4Co7dqGdBM4QGJQ","wechat_union_id":"","nickname":"厚积薄发","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Tpicsa0zgia6vZ75ImGnhfjoibCl51d0plfiaDKsd4icbPr4ZDVicxlwjU5ArL80GIpPyLtCSiboJJzDMvkVwm5ygra2w\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"294","type":"1","username":"obEXM4gJ2Z_trQ9StgHcTmKVdztk","password":"$2y$05$k\/oy448VEkVHA8gxQr7Vseg4ptFXDk9x\/QEkngt1xnYfn2sb.uADO","auth_key":"mh85IGTnz4MH-tcZeqBNGmxe5PeMRoDz","access_token":"TS46ZDaqp0p1t6gntKooJFJioLHvc7e7","addtime":"1527563183","is_delete":"0","wechat_open_id":"obEXM4gJ2Z_trQ9StgHcTmKVdztk","wechat_union_id":"","nickname":"机智的大毛君","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/STUSicZHtw77FXXiaSQIeSU1CtBzYibVvTPaTsTiajKrFunpJkmdPHqjiaEpFPfSFbviaaTWG4iciaHBVQBktICu29jnow\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"293","type":"1","username":"obEXM4p80mjI468RAGT1XXSoRT-w","password":"$2y$05$4JuJQY13J9OfctcvDtTb.OdAbTQezsC.UaXP8KsOp3jS.cbIgVG8i","auth_key":"ey9N3ZI0VpP25aTS_M7fJFSjheR92iRY","access_token":"JBK4h9qLqbGw1oNlxvV2YNYG2LJIGHYQ","addtime":"1527553563","is_delete":"0","wechat_open_id":"obEXM4p80mjI468RAGT1XXSoRT-w","wechat_union_id":"","nickname":"五了","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTLdgicaiavv0NrCialJT5aiamLNicYUUZ4WBYvrojZR6Qibl4JXrUksBy4qrn1GetojsXoiaiack4HbLgRLtA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"281","type":"1","username":"obEXM4r6EykHBaHlDJJ7MwD-jhQo","password":"$2y$05$vAtJS89sRuUJGIbBYG\/NSuGWjNclIcnWwILHzZyXvAv1MpOD4.JLm","auth_key":"8LI8tPzIVapy-nR3jVrRRXBCUxCqI-F0","access_token":"WntSs_B0XHHGTkD41WXP6mkdQvVEkVLb","addtime":"1527242163","is_delete":"0","wechat_open_id":"obEXM4r6EykHBaHlDJJ7MwD-jhQo","wechat_union_id":"","nickname":"丽丽-木子科技","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83eqeiaM0cPUOdVJfZc6JYjvdicocfzMiaLVdExQaQ5J615dGPJjXB4R2m1gy8FuoWjft5kk3CcREGtjVA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null}],
+         show_user_list:[{"id":"324","type":"1","username":"obEXM4owokdr1RZl7nxAaYKDlqUo","password":"$2y$05$zZpY.guVN0GOvYgd8qGNdOaAIt.1sVLpG5karNBG\/fptcJloG5D7m","auth_key":"bQV8YFENIHh411p00fYIGwcgezSJ3qJD","access_token":"Ru3YgEku24nO1UOZJkdlQZzATmv4CjQR","addtime":"1528426771","is_delete":"0","wechat_open_id":"obEXM4owokdr1RZl7nxAaYKDlqUo","wechat_union_id":"","nickname":"爱丽","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/oSr9SBRMGNzCc6krRAzT8edI4C8IfQgEGpfI1rjrJJONeC0vONMLwGibN9btm6NyaCMZpiaKdO3Sd4HhbEUpaBVg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"323","type":"1","username":"obEXM4srpHR5x6K5rNT-zJnmeM9E","password":"$2y$05$qwVbnHl.oUSav7iyYB9HquNl8McfqeqO8yRazd6v67P9CcS8YVo.6","auth_key":"ZExmazC3yA3hoNLHBw9ALM0wJ7UUGC2Z","access_token":"TR-9lBP5fUO6OKBgaIGKz_o7Jd6siAod","addtime":"1528426509","is_delete":"0","wechat_open_id":"obEXM4srpHR5x6K5rNT-zJnmeM9E","wechat_union_id":"","nickname":"幻点科技coco","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/l1Cic50masSye3m1KfsRb3BzpuUBp7hPGcULFykkcicbHTT4O7m5qdoichSiaK2lIaDoSjral7xuib30Z4atBQD0N7g\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"322","type":"1","username":"obEXM4r3j3RRrar4kjlbPRrrdlcw","password":"$2y$05$wq2QSzSC4ausVg6yXyQANOFNpL21yqNODVVGgCDDefGYIrWkIc5w2","auth_key":"RnMoGKcUx5fYikr6uVWQFn8--YNTBYQL","access_token":"oDg7PsHOl9EOJOlgCvIFncF0KAdYCqZB","addtime":"1528426482","is_delete":"0","wechat_open_id":"obEXM4r3j3RRrar4kjlbPRrrdlcw","wechat_union_id":"","nickname":"莺子13607726619","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/BiblaKjthHdxVeXhxHRgHI0EuNaBuOwVLiboMdeeaS6RGn0ABjiacCKZVhbyLC1BREAGbjzbT1DuWDqZsYL2tQVEg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"321","type":"1","username":"obEXM4umvCvT_kTRbuxf5Vec4DqI","password":"$2y$05$z.zoXYKD.5NTLLwx3dYu3uUJ4QRmGHVssQQkGp.\/jmw8o2HLYZO1u","auth_key":"Yb4zEMNnlWJirVU45rXQLWrofPDYPBNO","access_token":"WeJSAm78XwwOmp8IiVnokHQePra3GUZY","addtime":"1528426346","is_delete":"0","wechat_open_id":"obEXM4umvCvT_kTRbuxf5Vec4DqI","wechat_union_id":"","nickname":"honey","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83eoGibMsic1NCx5oNde7xDDsWcSoIiaOwyEgNR3CqJfWr9HYJlX72GDaCdbrMSYFE10yI89l9e4icOaDaQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"320","type":"1","username":"obEXM4lv66zljtn4k-OFOrXzzM94","password":"$2y$05$czfY5mb797eR8gbAiP\/XROilaWiV8.tWUVJO51z3.BfErH\/SSHVYu","auth_key":"vVwIQumWgNWXz9TIFkQS79XJk8PqUimC","access_token":"HZ6ff3ud95cgKt9l7T6kl994GlSnCjER","addtime":"1528426056","is_delete":"0","wechat_open_id":"obEXM4lv66zljtn4k-OFOrXzzM94","wechat_union_id":"","nickname":"YuHaoP","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/qDGaepQZOiaibXqIm4F0foNxibcdibuqYwjkmYsAdxo3sdD1dBCibpjJSs9uU7icCK0kicVRhVictRVWcdLE5Bn64hOyYg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"318","type":"1","username":"obEXM4k93OI_LSUSYtyOEarvLcvs","password":"$2y$05$k0bpdk\/PtbGrZ94QS.6jj.CsEf2zcmKJe1ZwSb\/WOoQQ2u1HnQP\/m","auth_key":"xolsEAjQEQwgxnLhildYL12KYUEPXwos","access_token":"61T2fe6WvM_LokBRDE67Gwd8MJzqMnpd","addtime":"1528379641","is_delete":"0","wechat_open_id":"obEXM4k93OI_LSUSYtyOEarvLcvs","wechat_union_id":"","nickname":"kcilcarus","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIZw3VfpHQlz2xv25Av81AQXVRYjX91BG7zdKKHibrtx8bmR9A9luiblDIkXcXIjqcJNvZpe7ASjLhg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"317","type":"1","username":"obEXM4qGvVCt1-Scw3WejWanOsMM","password":"$2y$05$YRyVnV4mOPlOL9YHNSMHJuvkKR37qjCbeJbbPl6m\/anCC2jAHau0G","auth_key":"XI_sqQOyilF9ptR_vKAnPK_4tgKN2C32","access_token":"xQ5vuQzUlgZFivekxat91wa6PN51KUBx","addtime":"1528372903","is_delete":"0","wechat_open_id":"obEXM4qGvVCt1-Scw3WejWanOsMM","wechat_union_id":"","nickname":"卡卡想知道","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTKrSZnqKEictdicaTpk2oibgYhDRdfhR4IbR4Q6jnkGcYOj0tPibV68csDjRlKR4Be2EHZuicE0bF4Gpew\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"314","type":"1","username":"obEXM4ja0FONQxY7k8_u2RRP50lA","password":"$2y$05$\/aLKWmByPuj\/uAMdFxlIReNEUU8L3zNvmuygiNjMNZ2K7BNeBFfIu","auth_key":"7AGfCg_MRLmC_hgMeUl_dIglpa3eSVhh","access_token":"h6sFV9pVdIJ_Jc8209d0A3lYKGxPTBG7","addtime":"1528345502","is_delete":"0","wechat_open_id":"obEXM4ja0FONQxY7k8_u2RRP50lA","wechat_union_id":"","nickname":"风猫","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTJRmN2LQ0g82IDXetk226eHJzQZ13P4Ng5WsH5ow7ibuQFxeKNncFkcwDzCSozAOwuNFNgJibo7mibYg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"313","type":"1","username":"obEXM4vMhpRNZyzyYIkoHDaLHwaE","password":"$2y$05$EHoK74IkxWruQaDpjTkCn.AFnylKTvtq.aHjlPlHuubNq.dEA2buu","auth_key":"pczH71VxOQ7m1X2xz10B9oF-nDU3ae3D","access_token":"PR1JBnfY1Kd2YXWLyNbPlxKABssC04WZ","addtime":"1528343769","is_delete":"0","wechat_open_id":"obEXM4vMhpRNZyzyYIkoHDaLHwaE","wechat_union_id":"","nickname":"风猫","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIhJR4XUtK5tkNibibOqPNicq2llicIP7PZyiag8W7cynLHnIvYzdibpvNC2bdKRouicmXXfnp1icBjxUPf1Q\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":null,"level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"306","type":"1","username":"obEXM4mUXC0PFyn1QTZCyzPigZyw","password":"$2y$05$NLDfC4FuW7xaQesVxcDjSePjSvIZTUGLszsfnKic\/e25aiIvH1AXG","auth_key":"slMqEhDSxyDG2W2opfyRAIzhc4G9f__1","access_token":"uCj-gaa18IyljmlS3ToCGNLDjwWFj1_q","addtime":"1527933734","is_delete":"0","wechat_open_id":"obEXM4mUXC0PFyn1QTZCyzPigZyw","wechat_union_id":"","nickname":"AAA新潮流(江丽)","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTIAXY5ofBqTZQItC06HKrWyFu1msMkxaic0EaYKO9VmAeox3AeKnOiayDZMibNVT8vVicBs8V4h7kaCXQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"304","type":"1","username":"obEXM4j1e0tU6q1s-So0czFN61vk","password":"$2y$05$iCRwDAofXnebKeXiOFkA4e8OfKtDRG8tGsDsHK3ptxSc648a3lBbG","auth_key":"3XI-H8FlTKV9xxlNP_axMqlkOrX7DmvO","access_token":"KqKQRepKuhRjWd64U_5X5nbiPHafWeqt","addtime":"1527825643","is_delete":"0","wechat_open_id":"obEXM4j1e0tU6q1s-So0czFN61vk","wechat_union_id":"","nickname":"振霆","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DQSEXQCxt36BHI7LbyI27gXVwYKZDLNFF1pXcoUt1wJVpwkJ14T9EXYQlyWiccicNKwpfiaKa3sQJiaCZBgjBbSHqQ\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"302","type":"1","username":"obEXM4uuhkLUJXvmZFVrDlvXTksY","password":"$2y$05$DFdp2.Us\/Vmt6RrOFvsfWeVZ2YuJ42Yvx4ztfXJSteMsoA4FYbFue","auth_key":"5IuP6X6jMibFd0gUFxra17J9uIkJMkia","access_token":"_y1jS6zJTcAwCEHTuvT9AHz-KZMLf09h","addtime":"1527745417","is_delete":"0","wechat_open_id":"obEXM4uuhkLUJXvmZFVrDlvXTksY","wechat_union_id":"","nickname":"☀杰佬銧","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/WAKyVtSjxnS92bVSHgBdaYmAb770PKyRibPclJD5icU7PwYZ2heecgzpmDkHQx79ciaBzTURHyGjmTrtZYQxrOtvw\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"301","type":"1","username":"obEXM4gchb_YJBMZlQmBc5InkN3A","password":"$2y$05$fva4.k4rVx0c\/g0Bd8Bq0usnePgic6DEckRG5SA4EFsRyMyxK4MIS","auth_key":"7tZ84l0SsJNqpgMs2NgGyKBK_rqgCTCi","access_token":"lCFyem-r3akUpyi_Qgutdrz5y-toHo_D","addtime":"1527735618","is_delete":"0","wechat_open_id":"obEXM4gchb_YJBMZlQmBc5InkN3A","wechat_union_id":"","nickname":"青菜","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/waJJ2Xk7F61iaIeuvufFobbekONbFic4XuJ4xuKyDBeRT3HtGjogAOzj7fPGrzZSYkbp73QUsL0R7DNN3LHibpGdA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"298","type":"1","username":"obEXM4udfoQuZBSe3MlYSHWemOAo","password":"$2y$05$qVyS\/A\/bwVU0otJNs\/NEd.EjWDER.opPhI2QSRZ2MGBztcXScv.E2","auth_key":"7SNFPqu0chK3uG4DwsgVBVF-FEVklPBu","access_token":"cjqN7VaUIwovonN1j7epkW5jbvCwE5Tq","addtime":"1527644251","is_delete":"0","wechat_open_id":"obEXM4udfoQuZBSe3MlYSHWemOAo","wechat_union_id":"","nickname":"ahowei","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTLDhEzLKBOsstic9yVmyhQ4fB2WDNGibS4YfKcJfbKwphNVDThfFoXc6zEpkysCicrrH29d3Q2zdwzDg\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"297","type":"1","username":"obEXM4lHYquYY4Co7dqGdBM4QGJQ","password":"$2y$05$nUEE2P6er\/ytBPQlvDwT5uU8Y\/hs6k1PrbP7JTe\/Tu04CAkKm.BZ.","auth_key":"mLCNiShvfFeB1Ca6uq1WjVVu8S5byP9C","access_token":"vftYQiLp3h7ouYtB6siCg34Q9S7eXn0A","addtime":"1527644012","is_delete":"0","wechat_open_id":"obEXM4lHYquYY4Co7dqGdBM4QGJQ","wechat_union_id":"","nickname":"厚积薄发","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Tpicsa0zgia6vZ75ImGnhfjoibCl51d0plfiaDKsd4icbPr4ZDVicxlwjU5ArL80GIpPyLtCSiboJJzDMvkVwm5ygra2w\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"294","type":"1","username":"obEXM4gJ2Z_trQ9StgHcTmKVdztk","password":"$2y$05$k\/oy448VEkVHA8gxQr7Vseg4ptFXDk9x\/QEkngt1xnYfn2sb.uADO","auth_key":"mh85IGTnz4MH-tcZeqBNGmxe5PeMRoDz","access_token":"TS46ZDaqp0p1t6gntKooJFJioLHvc7e7","addtime":"1527563183","is_delete":"0","wechat_open_id":"obEXM4gJ2Z_trQ9StgHcTmKVdztk","wechat_union_id":"","nickname":"机智的大毛君","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/STUSicZHtw77FXXiaSQIeSU1CtBzYibVvTPaTsTiajKrFunpJkmdPHqjiaEpFPfSFbviaaTWG4iciaHBVQBktICu29jnow\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"293","type":"1","username":"obEXM4p80mjI468RAGT1XXSoRT-w","password":"$2y$05$4JuJQY13J9OfctcvDtTb.OdAbTQezsC.UaXP8KsOp3jS.cbIgVG8i","auth_key":"ey9N3ZI0VpP25aTS_M7fJFSjheR92iRY","access_token":"JBK4h9qLqbGw1oNlxvV2YNYG2LJIGHYQ","addtime":"1527553563","is_delete":"0","wechat_open_id":"obEXM4p80mjI468RAGT1XXSoRT-w","wechat_union_id":"","nickname":"五了","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/Q0j4TwGTfTLdgicaiavv0NrCialJT5aiamLNicYUUZ4WBYvrojZR6Qibl4JXrUksBy4qrn1GetojsXoiaiack4HbLgRLtA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null},{"id":"281","type":"1","username":"obEXM4r6EykHBaHlDJJ7MwD-jhQo","password":"$2y$05$vAtJS89sRuUJGIbBYG\/NSuGWjNclIcnWwILHzZyXvAv1MpOD4.JLm","auth_key":"8LI8tPzIVapy-nR3jVrRRXBCUxCqI-F0","access_token":"WntSs_B0XHHGTkD41WXP6mkdQvVEkVLb","addtime":"1527242163","is_delete":"0","wechat_open_id":"obEXM4r6EykHBaHlDJJ7MwD-jhQo","wechat_union_id":"","nickname":"丽丽-木子科技","avatar_url":"https:\/\/wx.qlogo.cn\/mmopen\/vi_32\/DYAIOgq83eqeiaM0cPUOdVJfZc6JYjvdicocfzMiaLVdExQaQ5J615dGPJjXB4R2m1gy8FuoWjft5kk3CcREGtjVA\/132","store_id":"9","is_distributor":"0","parent_id":"0","time":"0","total_price":"0.00","price":"0.00","is_clerk":"0","we7_uid":"0","shop_id":"0","level":"-1","integral":"0","total_integral":"0","money":"0.00","contact_way":null,"comments":null,"binding":null}],
+         shop_list:[],
+         select_shop: "",
+         edit_user_id: "-1",
+     },
+     methods: {
+         //关键字查询
+         showKeyword: function () {
+             var _self = this;
+             var keyword = $.trim($('.keyword').val());
+             if (keyword == "") {
+                 _self.show_user_list = _self.user_list;
+                 return;
+             }
+             _self.show_user_list = [];
+             $.ajax({
+                 url: '/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Fget-user',
+                 dataType: 'json',
+                 type: 'get',
+                 data: {
+                     keyword: keyword
+                 },
+                 success: function (res) {
+                     _self.show_user_list = res;
+                 }
+             });
+//                for (var i = 0; i < _self.user_list.length; i++) {
+//                    if (_self.user_list[i].nickname.indexOf(keyword) != -1) {
+//                        _self.show_user_list.push(_self.user_list[i]);
+//                    }
+//                }
+         }
+     }
+ });
+ app.select_shop = app.shop_list.length > 0 ? app.shop_list[0] : ""
+</script>
+<script>
+ $(document).on('click', '.del', function () {
+     var a = $(this);
+     $.myConfirm({
+         content: a.data('content'),
+         confirm: function () {
+             $.ajax({
+                 url: a.data('url'),
+                 type: 'get',
+                 dataType: 'json',
+                 success: function (res) {
+                     if (res.code == 0) {
+                         window.location.reload();
+                     } else {
+                         $.myAlert({
+                             title: res.msg
+                         });
+                     }
+                 }
+             });
+         }
+     });
+     return false;
+ });
+ $(document).on('click', '.send', function () {
+     var a = $(this);
+     var index = $(this).data('index');
+     $('.shop-error').prop('hidden', true);
+     if (app.select_shop == "") {
+         $('.shop-error').prop('hidden', false).html('请先选择门店');
+         return;
+     }
+     $.ajax({
+         url: a.data('url'),
+         type: 'get',
+         dataType: 'json',
+         data: {
+             id: index,
+             shop_id: app.select_shop.id
+         },
+         success: function (res) {
+             if (res.code == 0) {
+                 window.location.reload();
+             } else {
+                 $.myAlert({
+                     title: res.msg
+                 });
+             }
+         }
+     });
+     return false;
+ });
+ $(document).on('click', '.shop-select', function () {
+     var index = $(this).data('index');
+     app.select_shop = app.shop_list[index];
+ });
+ $(document).on('click', '.user-shop-edit', function () {
+     if (app.user_list.length > 0) {
+         app.edit_user_id = $(this).data('id');
+         $('#shop-edit').modal('show');
+     }
+ });
+</script>
+
+ </div>
+</div>
+
+{/block}

@@ -1,0 +1,87 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+<div class="we7-page-title">
+入口设置
+</div>
+<ul class="we7-page-tab">
+  <li class="active"><a href="./index.php?c=platform&a=cover&m=xfydm_wuzhe&eid=2086&version_id=29">封面链接入口</a></li>
+</ul>
+<div id="js-keyword-display">
+<div ng-controller="KeywordDisplay" ng-cloak>
+<table class="table we7-table table-hover vertical-middle">
+  <col width="150px"/>
+  <col width="200px" />
+  <col width="" />
+  <col width="250px" />
+  <tr>
+    <th>二维码</th>
+    <th class="text-left">入口名称</th>
+    <th>关键字</th>
+    <th class="text-right">操作</th>
+  </tr>
+        <tr>
+    <td data-url="https://wx.gxmuzi.com/app/./index.php?i=322&j=322&c=entry&eid=2086" data-size="100" class="js-url-qrcode">
+      <div class="qrcode-block"><canvas></canvas></div>
+    </td>
+    <td class="text-left">商家绑定</td>
+    <td>
+              </td>
+    <td>
+      <div class="link-group" style="position:relative;">
+        <a href="./index.php?c=platform&a=cover&do=post&m=xfydm_wuzhe&eid=2086" class="color-default">编辑</a>
+        <a href="javascript:;" data-url="https://wx.gxmuzi.com/app/./index.php?i=322&j=322&c=entry&eid=2086" style="margin-right:0px;" class="color-default js-clip">复制链接</a>
+      </div>
+    </td>
+  </tr>
+        <tr>
+    <td data-url="https://wx.gxmuzi.com/app/./index.php?i=322&j=322&c=entry&eid=2085" data-size="100" class="js-url-qrcode">
+      <div class="qrcode-block"><canvas></canvas></div>
+    </td>
+    <td class="text-left">订单核销</td>
+    <td>
+              </td>
+    <td>
+      <div class="link-group" style="position:relative;">
+        <a href="./index.php?c=platform&a=cover&do=post&m=xfydm_wuzhe&eid=2085" class="color-default">编辑</a>
+        <a href="javascript:;" data-url="https://wx.gxmuzi.com/app/./index.php?i=322&j=322&c=entry&eid=2085" style="margin-right:0px;" class="color-default js-clip">复制链接</a>
+      </div>
+    </td>
+  </tr>
+      </table>
+</div>
+</div>
+<script type="text/javascript">
+$(function() {
+require(['jquery.qrcode'], function(){
+  $('.js-url-qrcode').each(function(){
+    url = $(this).data('url');
+    $(this).find('.qrcode-block').html('').qrcode({
+      render: 'canvas',
+      width: $(this).data('size'),
+      height: $(this).data('size'),
+      text: url
+    });
+  });
+});
+$('.js-clip').each(function(){
+  util.clip(this, $(this).data('url'));
+});
+});
+require(['underscore'], function() {
+angular.module('replyFormApp').value('config', {
+  replydata: null,
+  uniacid: 322,
+  links: {
+    postUrl: "./index.php?c=platform&a=reply&do=post&",
+  },
+});
+angular.bootstrap($('#js-keyword-display'), ['replyFormApp']);
+});
+
+window.validateReplyForm = function(key) {
+return true;
+}
+</script>
+  </div>
+{/block}

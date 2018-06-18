@@ -1,0 +1,91 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <script charset="utf-8" src="Scripts/97cd015f91c74523841f6565f4ef7e34.js"></script>
+<div class="panel mb-3">
+<div class="panel-header">门店设置</div>
+<div class="panel-body">
+    <div class="float-left pt-2 mb-4">
+        <a class="btn btn-primary edit-modal" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fshop-edit">添加门店</a>
+    </div>
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>门店名称</th>
+            <th>联系方式</th>
+            <th>门店地址</th>
+            <th>经纬度</th>
+            <th>核销订单</th>
+            <th>销售总额</th>
+            <th>核销卡券</th>
+            <th>默认门店</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+</div>
+</div>
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    $.myConfirm({
+        content: a.data('content'),
+        confirm: function () {
+            $.ajax({
+                url: a.data('url'),
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.myAlert({
+                            title: "提示",
+                            content: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+    return false;
+});
+
+function upDown(id, type) {
+    var text = '';
+    if (type == 1) {
+        text = "开启默认门店";
+    } else {
+        text = '关闭默认门店';
+    }
+
+    var url = "/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fshop-up-down";
+    if (confirm("是否" + text + "？")) {
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+            data: {id: id, type: type},
+            success: function (res) {
+                if (res.code == 0) {
+                    window.location.reload();
+                }
+                if (res.code == 1) {
+                    alert(res.msg);
+                    if (res.return_url) {
+                        location.href = res.return_url;
+                    }
+                }
+            }
+        });
+    }
+    return false;
+}
+</script>
+</div>
+</div>
+{/block}

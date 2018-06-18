@@ -1,0 +1,24 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">
+    <span>运费规则</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fpostage-rules-edit">添加新规则</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <tr>
+            <th>规则名称</th>
+            <th hidden>快递公司</th>
+            <th>是否默认</th>
+            <th>操作</th>
+        </tr>
+                </table>
+</div>
+</div>
+{/block}

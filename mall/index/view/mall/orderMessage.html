@@ -1,0 +1,130 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+
+<div class="panel">
+<div class="panel-header">消息提醒</div>
+<div class="panel-body">
+    <a class="btn btn-sm btn-primary mb-4 del" href="javascript:" data-content="是否标记当前消息为已提醒？"
+       data-url="/addons/zjhj_mall/core/web/index.php?r=mch%2Fget-data%2Fsound-all">标记当前消息为已提醒</a>
+    <table class="table table-bordered">
+        <tr>
+            <th>消息名称</th>
+            <th>消息所属</th>
+            <th>消息类型</th>
+            <th>来自用户</th>
+            <th>是否已提醒</th>
+            <th>消息时间</th>
+            <th>操作</th>
+        </tr>
+                        <tr>
+                <td>20180529110844301180</td>
+                <td>
+                                                                                <span>下单</span>
+                                                                    </td>
+                <td>拼团订单</td>
+                <td>黄俊</td>
+                <td>已提醒</td>
+                <td>2018-05-29 11:08:50</td>
+                <td>
+                                                                                                                    <a class="btn btn-sm btn-primary"
+                                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fgroup%2Forder%2Findex&keyword_1=1&keyword=20180529110844301180"
+                                   target="_blank">查看</a>
+                                                                                                    </td>
+            </tr>
+                        <tr>
+                <td>20180529084901820049</td>
+                <td>
+                                                                                <span>下单</span>
+                                                                    </td>
+                <td>商城订单</td>
+                <td>闭丽丽</td>
+                <td>已提醒</td>
+                <td>2018-05-29 08:49:12</td>
+                <td>
+                                                                                                                    <a class="btn btn-sm btn-primary"
+                                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Forder%2Findex&keyword_1=1&keyword=20180529084901820049"
+                                   target="_blank">查看</a>
+                                                                                                    </td>
+            </tr>
+                        <tr>
+                <td>20180529082619906758</td>
+                <td>
+                                                                                <span>下单</span>
+                                                                    </td>
+                <td>拼团订单</td>
+                <td>闭丽丽</td>
+                <td>已提醒</td>
+                <td>2018-05-29 08:26:30</td>
+                <td>
+                                                                                                                    <a class="btn btn-sm btn-primary"
+                                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fgroup%2Forder%2Findex&keyword_1=1&keyword=20180529082619906758"
+                                   target="_blank">查看</a>
+                                                                                                    </td>
+            </tr>
+                        <tr>
+                <td>20180529082356102856</td>
+                <td>
+                                                                                <span>下单</span>
+                                                                    </td>
+                <td>拼团订单</td>
+                <td>闭丽丽</td>
+                <td>已提醒</td>
+                <td>2018-05-29 08:24:02</td>
+                <td>
+                                                                                                                    <a class="btn btn-sm btn-primary"
+                                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fgroup%2Forder%2Findex&keyword_1=1&keyword=20180529082356102856"
+                                   target="_blank">查看</a>
+                                                                                                    </td>
+            </tr>
+                        <tr>
+                <td>20180529082123201796</td>
+                <td>
+                                                                                <span>下单</span>
+                                                                    </td>
+                <td>拼团订单</td>
+                <td>闭丽丽</td>
+                <td>已提醒</td>
+                <td>2018-05-29 08:21:30</td>
+                <td>
+                                                                                                                    <a class="btn btn-sm btn-primary"
+                                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fgroup%2Forder%2Findex&keyword_1=1&keyword=20180529082123201796"
+                                   target="_blank">查看</a>
+                                                                                                    </td>
+            </tr>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">5条数据</div>
+    </div>
+</div>
+</div>
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    $.myConfirm({
+        content: a.data('content'),
+        confirm: function () {
+            $.ajax({
+                url: a.data('url'),
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    localStorage.removeItem('sound_list');
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.myAlert({
+                            title: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>    </div>
+</div>
+
+{/block}

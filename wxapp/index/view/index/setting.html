@@ -1,0 +1,501 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <style>
+        .ycfj_dis{ display:none; }
+    </style>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">
+                参数设置
+            </a>
+        </li>
+        <!-- <li role="presentation" class="active"><a href="#setting" aria-controls="setting" role="tab" data-toggle="tab">小程序参数设置</a></li>
+        <li role="presentation"><a href="#gongzhong" aria-controls="gongzhong" role="tab" data-toggle="tab">公众号参数设置</a></li>
+        <li role="presentation"><a href="#tchx" aria-controls="tchx" role="tab" data-toggle="tab">套餐核销设置</a></li>
+        <li role="presentation"><a href="#mbxx" aria-controls="tchx" role="tab" data-toggle="tab">小程序模板消息设置</a></li>
+        <li role="presentation"><a href="#gzhmbxx" aria-controls="tchx" role="tab" data-toggle="tab">公众号模板消息设置</a></li>
+        <li role="presentation"><a href="#btsz" aria-controls="tchx" role="tab" data-toggle="tab">首页标题设置</a></li>
+        <li role="presentation"><a href="#jszc" aria-controls="tchx" role="tab" data-toggle="tab">技术支持设置</a></li> -->
+    </ul>
+    <div class="main">
+        <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data"
+        id="form1">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="setting">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            小程序AppID
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="appid" value="wxdd4b0d97978e7a4d" class="form-control">
+                            <span class="help-block">
+                                小程序appid
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            小程序AppSecret
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="secret" value="337f95f2c3cebcee700d12d7fb6f9e96"
+                            class="form-control">
+                            <span class="help-block">
+                                小程序AppSecret
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            商户号
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="mch_id" value="1500499542" class="form-control">
+                            <span class="help-block">
+                                小程序微信支付商户号, 开通微信支付才能获得商户号
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            商户支付密钥
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="password" value="ldtto9fm2ppjkldfjgtg43p53094ti34"
+                            class="form-control">
+                            <span class="help-block">
+                                小程序微信支付商户所使用的支付密钥, 开通微信支付才能获得商户号
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            高德地图密钥
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="my" value="1184d923fa701af0877ebae83c17a417"
+                            class="form-control">
+                            <span class="help-block">
+                                高德地图
+                                <span style="color:red;">
+                                    Web服务端
+                                </span>
+                                API密钥（建议申请为企业开发者，可获得更多配额）
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            公众号AppID
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="gzappid" value="wxe16a6a4dc6bae7f2" class="form-control">
+                            <span class="help-block">
+                                公众号appid（借权服务号，用于核销）
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            公众号AppSecret
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="gzsecret" value="4e5c87000a653b52d3d148f47ca0ace8"
+                            class="form-control">
+                            <span class="help-block">
+                                公众号AppSecret（借权服务号，用于核销）
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            套餐购买模板ID(小程序)
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="tcgm" value="" class="form-control">
+                            <span class="help-block">
+                                模板库中搜索模板ID：AT0009，模板标题：订单支付成功通知。
+                                <br />
+                                关键词配置顺序为：订单金额、商家名称、商品名称、订单编号、支付时间。
+                                <br />
+                                <span style="color:red;">
+                                    注意：关键词配置顺序请勿随意更改
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            卡类购买模板ID(小程序)
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="wzkgm" value="" class="form-control">
+                            <span class="help-block">
+                                模板库中搜索模板ID：AT0002，模板标题：购买成功通知。
+                                <br />
+                                关键词配置顺序为：物品名称、交易金额、有效期、交易单号。
+                                <br />
+                                <span style="color:red;">
+                                    注意：关键词配置顺序请勿随意更改
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            积分商城购买成功模板ID(小程序)
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="jfsc" value="" class="form-control">
+                            <span class="help-block">
+                                模板库中搜索模板ID：AT0004，模板标题：交易提醒。
+                                <br />
+                                关键词配置顺序为：商品名称、支付金额、温馨提示、订单编号、交易时间。
+                                <br />
+                                <span style="color:red;">
+                                    注意：关键词配置顺序请勿随意更改
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            商户新订单通知
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="muban_id" value="" class="form-control">
+                            <span class="help-block">
+                                公众号模板库中搜索模板标题：商品支付成功通知，模板编号：OPENTM202183094。
+                                <br />
+                                <span style="color:red;">
+                                    用于商户接收新订单通知
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户付款成功模板ID(公众号用户端)</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="yh_mbid" value="" class="form-control">
+                    <span class="help-block">
+                    模板库所属行业：一级行业：IT科技；二级行业：互联网|电子商务<br />
+                    模板编号：OPENTM202183094，模板标题：商品支付成功通知。<br />
+                    </span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户积分变动提醒模板ID(公众号用户端)</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="yh_jfbd" value="" class="form-control">
+                    <span class="help-block">
+                    模板库所属行业：一级行业：IT科技；二级行业：互联网|电子商务<br />
+                    模板编号：OPENTM207509450，模板标题：积分变动提醒。<br />
+                    </span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">用户付款成功模板ID(公众号商家端)</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="sj_mbid" value="" class="form-control">
+                    <span class="help-block">
+                    模板库所属行业：一级行业：IT科技；二级行业：互联网|电子商务<br />
+                    模板编号：OPENTM200750297，模板标题：新订单通知。<br />
+                    </span>
+                    </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            首页标题
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="sy_name" value="" class="form-control">
+                            <span class="help-block">
+                                用于显示在小程序首页的标题
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            轮播图是否自动轮播
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <label class="radio-inline">
+                                <input name="is_lb" type="radio" value="0" checked="checked">
+                                否
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_lb" type="radio" value="1">
+                                是
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            是否强制信息填写
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <label class="radio-inline">
+                                <input name="qz" type="radio" value="0" checked="checked">
+                                否
+                            </label>
+                            <label class="radio-inline">
+                                <input name="qz" type="radio" value="1">
+                                是
+                            </label>
+                            <div>
+                                积分商城购买商品是否强制填写收货地址
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            是否使用远程附件
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <label class="radio-inline">
+                                <input name="ycfj" type="radio" value="0" onclick="ycfj_off()">
+                                否
+                            </label>
+                            <label class="radio-inline">
+                                <input name="ycfj" type="radio" value="1" onclick="ycfj_on()" checked="checked">
+                                是
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group ycfj_url">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            远程附件url
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <input type="text" name="ycfj_url" value="http://wxoss.gxmuzi.com" class="form-control ycfj_url">
+                            <span class="help-block">
+                                请填写远程附件url
+                                <br/>
+                                为防止出错，当使用远程附件选项为否时，此处参数自动重置为空。
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            评价是否审核
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <label class="radio-inline">
+                                <input name="is_sh" type="radio" value="0" checked="checked">
+                                否
+                            </label>
+                            <label class="radio-inline">
+                                <input name="is_sh" type="radio" value="1">
+                                是
+                            </label>
+                            <div>
+                                用户评价是否需要审核后显示在小程序上
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">商家列表1</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="jrwz" value="" class="form-control">
+                    <span class="help-block">
+                    今日五折标题修改，不修改则显示默认标题
+                    </span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">商家列表2</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <input type="text" name="mdtj" value="" class="form-control">
+                    <span class="help-block">
+                    名店推荐标题修改，不修改则显示默认标题
+                    </span>
+                    </div>
+                    </div> -->
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分单价</label>
+                    <div class="col-sm-8">
+                    <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" name="czjfdj" value="">
+                    <div class="input-group-addon">元/积分</div>
+                    </div>
+                    </div>
+                    <div>几元=1积分，如填写0.001，则表示1元=1000积分</div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">最低充值</label>
+                    <div class="col-sm-8">
+                    <div class="input-group">
+                    <input type="text" class="form-control" placeholder="" name="zdcz" value="">
+                    <div class="input-group-addon">积分</div>
+                    </div>
+                    </div>
+                    <div>此处是最低充值多少积分，填0为没有最低限制</div>
+                    </div> -->
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            积分商城logo
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <script type="text/javascript">
+                                function showImageDialog(elm, opts, options) {
+                                    require(["util"],
+                                    function(util) {
+                                        var btn = $(elm);
+                                        var ipt = btn.parent().prev();
+                                        var val = ipt.val();
+                                        var img = ipt.parent().next().children();
+                                        options = {
+                                            'global': false,
+                                            'class_extra': '',
+                                            'direct': true,
+                                            'multiple': false,
+                                            'fileSizeLimit': 2097152
+                                        };
+                                        util.image(val,
+                                        function(url) {
+                                            if (url.url) {
+                                                if (img.length > 0) {
+                                                    img.get(0).src = url.url;
+                                                }
+                                                ipt.val(url.attachment);
+                                                ipt.attr("filename", url.filename);
+                                                ipt.attr("url", url.url);
+                                            }
+                                            if (url.media_id) {
+                                                if (img.length > 0) {
+                                                    img.get(0).src = "";
+                                                }
+                                                ipt.val(url.media_id);
+                                            }
+                                        },
+                                        options);
+                                    });
+                                }
+                                function deleteImage(elm) {
+                                    $(elm).prev().attr("src", "./resource/images/nopic.jpg");
+                                    $(elm).parent().prev().find("input").val("");
+                                }
+                            </script>
+                            <div class="input-group ">
+                                <input type="text" name="jfscpic" value="__STATIC__/images/322/2018/05/cT4fOB3n4dsbQn3wbrQwW346QBzbo4.jpg"
+                                class="form-control" autocomplete="off">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" onclick="showImageDialog(this);">
+                                        选择图片
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group " style="margin-top:.5em;">
+                                <img src="__STATIC__/Picture/ct4fob3n4dsbqn3wbrqww346qbzbo4.jpg" onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'"
+                                class="img-responsive img-thumbnail" width="150" />
+                                <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片"
+                                onclick="deleteImage(this)">
+                                    ×
+                                </em>
+                            </div>
+                            <span class="help-block">
+                                用于显示在积分商城首页的logo
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            套餐核销logo
+                        </label>
+                        <div class="col-sm-9 col-xs-12">
+                            <div class="input-group ">
+                                <input type="text" name="pic" value="__STATIC__/images/322/2018/05/cT4fOB3n4dsbQn3wbrQwW346QBzbo4.jpg"
+                                class="form-control" autocomplete="off">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" onclick="showImageDialog(this);">
+                                        选择图片
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group " style="margin-top:.5em;">
+                                <img src="__STATIC__/Picture/ct4fob3n4dsbqn3wbrqww346qbzbo4.jpg" onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'"
+                                class="img-responsive img-thumbnail" width="150" />
+                                <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片"
+                                onclick="deleteImage(this)">
+                                    ×
+                                </em>
+                            </div>
+                            <span class="help-block">
+                                用于显示在套餐核销页面的logo
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">技术支持</label>
+                    <div class="col-sm-6 col-xs-12">
+                    <textarea class="form-control" name="content" id="" cols="20" rows="6"></textarea>
+                    <textarea id="jszc" name="jszc" type="text/plain" style="height:200px;"></textarea>
+                    <script type="text/javascript">
+                    require(['util'], function(util){
+                    util.editor('jszc', {
+                    height : 200,
+                    dest_dir : '',
+                    image_limit : 2097152,
+                    allow_upload_video : true,
+                    audio_limit : 5120000,
+                    callback : ''
+                    });
+                    });
+                    </script>
+                    </div>
+                    <span class="help-block">用于显示在技术支持页面</span>
+                    </div> -->
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">技术支持</label>
+                    <div class="col-sm-9 col-xs-12">
+                    <div class="input-group ">
+                    <input type="text" name="jszc" value="" class="form-control" autocomplete="off">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="showImageDialog(this);">选择图片</button>
+                    </span>
+                    </div>
+                    <div class="input-group " style="margin-top:.5em;">
+                    <img src="Picture/nopic.jpg" onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail"  width="150" />
+                    <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片" onclick="deleteImage(this)">×</em>
+                    </div>                      <span class="help-block">用于显示在技术支持页面的公众号二维码</span>
+                    </div>
+                    </div> -->
+                </div>
+                <!-- <div role="tabpanel" class="tab-pane" id="gongzhong">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tchx">
+                </div> -->
+                <!-- <div role="tabpanel" class="tab-pane" id="mbxx">
+                </div> -->
+                <!-- <div role="tabpanel" class="tab-pane" id="gzhmbxx">
+                </div> -->
+                <!-- <div role="tabpanel" class="tab-pane" id="btsz">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="jszc">
+                </div> -->
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-2 col-lg-offset-2">
+                            <input name="submit" type="submit" value="提交" class="btn btn-primary"
+                            />
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function ycfj_off() {
+            $(".ycfj_url").addClass("ycfj_dis");
+            $(".ycfj_url").val("");
+        }
+        function ycfj_on() {
+            $(".ycfj_url").removeClass("ycfj_dis");
+        }
+    </script>
+</div>
+{/block}

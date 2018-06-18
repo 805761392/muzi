@@ -1,0 +1,62 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fmiaosha%2Fgoods">按商品查看</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fmiaosha%2Fcalendar">按日历查看</a>
+        </li>
+    </ul>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fmiaosha%2Fgoods-edit">添加秒杀商品</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>商品ID</th>
+            <th>商品</th>
+            <th>开放次数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+                        <tr>
+                <td colspan="4" class="text-center p-5">
+                    <a href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fmiaosha%2Fgoods-edit">添加秒杀商品</a>
+                </td>
+            </tr>
+                </table>
+</div>
+</div>
+
+<script>
+$(document).on("click", ".delete-btn", function () {
+    var url = $(this).attr("href");
+    $.confirm({
+        content: "确认删除？删除后该商品的所有秒杀设置将全部删除！",
+        confirm: function () {
+            $.loading();
+            $.ajax({
+                url: url,
+                type: "get",
+                dataType: "json",
+                success: function (res) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>
+</div>
+</div>
+{/block}

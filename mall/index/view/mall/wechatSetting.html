@@ -1,0 +1,96 @@
+﻿{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+        <div class="panel-header">微信配置</div>
+            <div class="panel-body">
+                <form class="auto-form" method="post">
+                    <div class="form-group row">
+                        <div class="form-group-label col-sm-2 text-right">
+                            <label class="col-form-label required">小程序AppId</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" value="wx9c39ecd8d440070e" name="app_id" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group-label col-sm-2 text-right">
+                            <label class="col-form-label required">小程序AppSecret</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-hide">
+                                <input class="form-control" value="cc3b1f01c7c6e6942efe096758404590" name="app_secret" />
+                                <div class="tip-block">已隐藏内容，点击查看或编辑</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group-label col-sm-2 text-right">
+                            <label class="col-form-label required">微信支付商户号</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" value="1500499542" name="mch_id" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group-label col-sm-2 text-right">
+                            <label class="col-form-label required">微信支付Api密钥</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="input-hide">
+                                <input class="form-control" value="ldtto9fm2ppjkldfjgtg43p53094ti34" name="key" />
+                                <div class="tip-block">已隐藏内容，点击查看或编辑</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group-label col-sm-2 text-right">
+                            <label class="col-form-label">微信支付apiclient_cert.pem</label>
+                        </div>
+                    <div class="col-sm-6">
+                        <div class="input-hide">
+                            <textarea rows="5" class="form-control secret-content" name="cert_pem">-----BEGIN CERTIFICATE----- MIIEaTCCA9KgAwIBAgIEAdPUnTANBgkqhkiG9w0BAQUFADCBijELMAkGA1UEBhMC Q04xEjAQBgNVBAgTCUd1YW5nZG9uZzERMA8GA1UEBxMIU2hlbnpoZW4xEDAOBgNV BAoTB1RlbmNlbnQxDDAKBgNVBAsTA1dYRzETMBEGA1UEAxMKTW1wYXltY2hDQTEf MB0GCSqGSIb3DQEJARYQbW1wYXltY2hAdGVuY2VudDAeFw0xODAzMjAwMzU2MDha Fw0yODAzMTcwMzU2MDhaMIGYMQswCQYDVQQGEwJDTjESMBAGA1UECBMJR3Vhbmdk b25nMREwDwYDVQQHEwhTaGVuemhlbjEQMA4GA1UEChMHVGVuY2VudDEOMAwGA1UE CxMFTU1QYXkxLTArBgNVBAMUJOW5v+ilv+W5u+eCuee9kee7nOenkeaKgOaciemZ kOWFrOWPuDERMA8GA1UEBBMIOTkwMDYwMjYwggEiMA0GCSqGSIb3DQEBAQUAA4IB DwAwggEKAoIBAQDpVo5ZK4tbBqhr2zpSJO4j6z7Lu3Nsmr5NBMKgQbiV8ZCLq4G1 moHHjfeIB2Hxty76jDMD72FjPh0Xr4GMQd5h4yF8yd8k1GG7CkEwicALMbU+nJUS M6y5GAv3tq5/A1JjEKEv9t0ITE9sBzyAxdfZgcbwWd9RTYyyngD5LK+2wfl5n5uL 22rIj0K9fy+kk0j2LWDs5+fQGDtd2+YOnLZr8p1+7bVzmPq9YI18xq6Iqgs1+mlB wsBVcQy9DB8JjvzI2vVlfT4mQvqYPaI+ze92bhr4ByB8GTepk21eq4oGO5s2QC95 USl0dvc3cAu9fX3UPbEGdGRYkSTDWCXfDSrHAgMBAAGjggFGMIIBQjAJBgNVHRME AjAAMCwGCWCGSAGG+EIBDQQfFh0iQ0VTLUNBIEdlbmVyYXRlIENlcnRpZmljYXRl IjAdBgNVHQ4EFgQUVxahU43FcH/GbgnSMaBcwa6D4Ewwgb8GA1UdIwSBtzCBtIAU PgUm9iJitBVbiM1kfrDUYqflhnShgZCkgY0wgYoxCzAJBgNVBAYTAkNOMRIwEAYD VQQIEwlHdWFuZ2RvbmcxETAPBgNVBAcTCFNoZW56aGVuMRAwDgYDVQQKEwdUZW5j ZW50MQwwCgYDVQQLEwNXWEcxEzARBgNVBAMTCk1tcGF5bWNoQ0ExHzAdBgkqhkiG 9w0BCQEWEG1tcGF5bWNoQHRlbmNlbnSCCQC7VJcrvADoVzAOBgNVHQ8BAf8EBAMC BsAwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQEFBQADgYEAkFnt 1aes0WfVhVcTMo+Rom4KnD2OdevQLYI0sskzHgKqB2Kq/dseE/20FaaCJu5AVPBv zrhyn8VYX1PfDsb1JM2HQiB9/UEVc55yojFA/dFPzmV8qPjNHiWpFXebnQNR9C36 FvG/ZNZPR0szQovxPEksKpL6v1sMCDdPHnNsBIo= -----END CERTIFICATE-----</textarea>
+                            <div class="tip-block">已隐藏内容，点击查看或编辑</div>
+                        </div>
+                    <div class="fs-sm text-muted">
+                    使用文本编辑器打开apiclient_cert.pem文件，将文件的全部内容复制进来
+                    </div>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                    <div class="form-group-label col-sm-2 text-right">
+                    <label class="col-form-label">微信支付apiclient_key.pem</label>
+                    </div>
+                    <div class="col-sm-6">
+                    <div class="input-hide">
+                    <textarea rows="5" class="form-control secret-content" name="key_pem">-----BEGIN PRIVATE KEY----- MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDpVo5ZK4tbBqhr 2zpSJO4j6z7Lu3Nsmr5NBMKgQbiV8ZCLq4G1moHHjfeIB2Hxty76jDMD72FjPh0X r4GMQd5h4yF8yd8k1GG7CkEwicALMbU+nJUSM6y5GAv3tq5/A1JjEKEv9t0ITE9s BzyAxdfZgcbwWd9RTYyyngD5LK+2wfl5n5uL22rIj0K9fy+kk0j2LWDs5+fQGDtd 2+YOnLZr8p1+7bVzmPq9YI18xq6Iqgs1+mlBwsBVcQy9DB8JjvzI2vVlfT4mQvqY PaI+ze92bhr4ByB8GTepk21eq4oGO5s2QC95USl0dvc3cAu9fX3UPbEGdGRYkSTD WCXfDSrHAgMBAAECggEBAIOZf5snBeeGr8J02EWv8mdrq/T3ebfM5ntFrgb4SgS3 QxCi3/ruczd7CBo+H61V5TcFj1gu0DxKsdnD8EqMc8G9eguJR0LcTWpR9EZNynQF yvTPFvw3DLkvqMBC1dNoqjSZEm+cyTh+4WRKCIOQEZborKyt41dVZ37twhrGayuk 00DYjNm41sjHyo5AhfCzyM7I5Mg9KsXse7QA2MR2YcWYevXBbMI7UWyopCqEpR1Z iXCx71DwrNvBMzD4xWSeuYc040hnf1hrk7DCiCB6kHg+apUsuFSxTOszS1fN9UN3 ilseqCMGZMVw8L6JImA5F6Qwbf3TyzPE/qU3pPYtHdECgYEA9KiODAfbHdBxYGMS KiQvaKzgtULmgVxvyS4pwt5ttz11sFC1S1GcSvmQ1HWQJ6enWu+V+rTSTYAWwoxT JqARGDZ5utxXJxRpm20Ze9FOKDaOG8cXwGmYog57V6ZmM7MA5eR579yC+ZVIrUWb EmgBwR+lY4Xk+1cVmq/LiOnsBQUCgYEA9CeowgvLjGoPUQDSv+2PZxc2ZkHkyebt GXXhZTZBtZXyg0embJK28Z4lrtbAu0DueRKowAlC93pRB7MAYA60W6+pAbSjjMyK dK2ueH6EvqDADFp7c2Zkl5HBndKUrKe4qpRasT5C63UlL883ag14W7DI/dLGEDQH A07jtrInelsCgYEA20qxd4sbFZAd710djPQ+Ij7CcvXyEgU+lT5xZB9mjBXkhRLy TP5rbrBe5nAxs7mMQe/5qGunDJxAykRoy3gxmlhJp/mTjI25UvzpGJg0y8qKec9s NKTxkGAWoiud870Akw7FVP97ziXGrLh1FHxxBh9NaPU8lyQpUys67g9t49kCgYEA s3ZjSR66Y1+iGnxsbL8FZVVemxNcRDwFk21eW7Lh4cNyGqUT40KETl1cfYNE717u 6veYKm+kVZwG643bfL/SOoKHy8UnYlsGenUfhVoZ4LTv9SSdEVn2HqL4mjUrKy2t Q1UAxL9rGP9mchnyNXXpPhxX4JqJE2fqr7fREX0qH3kCgYBUlY95azbD7hyOZD01 z8C+U/bp4DYLLJ9NEC1+mNQqLIzm8f0J9XfMlGlj1uEbks1rv8sa0TA8C5+QNoNe g9JOw7NxWoBaohUeRiytIehjZ4gOf3BzB8Db4T74Vmgz3wMJOd1XkplhuYvqMCuf FrGYgO/e8Qb3mjdDcdRRH7gycA== -----END PRIVATE KEY-----</textarea>
+                    <div class="tip-block">
+                    已隐藏内容，点击查看或编辑
+                    </div>
+                    </div>
+                    <div class="fs-sm text-muted">
+                    使用文本编辑器打开apiclient_key.pem文件，将文件的全部内容复制进来
+                    </div>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                    <div class="form-group-label col-sm-2 text-right">
+                    </div>
+                    <div class="col-sm-6">
+                    <a class="btn btn-primary auto-form-btn" href="javascript:">保存</a>
+                    </div>
+                    </div>
+</form>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).on("click", ".input-hide .tip-block", function () {
+        $(this).hide();
+    });
+    $(document).on("click", ".input-group .dropdown-item", function () {
+       var val = $.trim($(this).text());
+       $(this).parents(".input-group").find(".form-control").val(val);
+   });
+</script>
+{/block}

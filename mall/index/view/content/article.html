@@ -1,0 +1,57 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>关于我们</span>
+        </div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>类别</th>
+            <th>标题</th>
+            <th>排序</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+                        <tr>
+                <td>7</td>
+                <td>关于我们</td>
+                <td>我们HEY折扣</td>
+                <td>100</td>
+                <td>
+                    <a class="btn btn-sm btn-primary"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Farticle%2Fedit&cat_id=1&id=7">编辑</a>
+                                                <a class="btn btn-sm btn-primary copy"
+                           data-clipboard-text="/pages/article-detail/article-detail?id=about_us"
+                           href="javascript:" hidden>复制链接</a>
+                                        </td>
+            </tr>
+                </table>
+</div>
+</div>
+
+<script>
+$(document).on("click", ".article-delete", function () {
+    var href = $(this).attr("href");
+    $.confirm({
+        content: "确认删除？",
+        confirm: function () {
+            $.loading();
+            $.ajax({
+                url: href,
+                dataType: "json",
+                success: function (res) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>    </div>
+</div>
+{/block}

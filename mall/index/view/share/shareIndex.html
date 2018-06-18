@@ -1,0 +1,417 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">分销商列表</div>
+<div class="panel-body">
+    <div class="mb-3 clearfix">
+        <div class="p-4 bg-shaixuan">
+            <form method="get">
+                                                            <input type="hidden" name="r" value="mch/share/index">
+                                    <div flex="dir:left">
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="姓名/微信昵称"
+                                   name="keyword"
+                                   autocomplete="off"
+                                   value="">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary">筛选</button>
+                                </span>
+                                <span style="padding-left:20px" class="input-group-btn">
+                                    <a class="btn btn-primary batch" href="javascript:void(0)"
+                                       data-url="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fbatch"
+                                       data-content="是否批量通过" data-type="0">批量通过</a>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="mb-4">
+        <ul class="nav nav-tabs status">
+            <li class="nav-item">
+                <a class="status-item nav-link active"
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Findex">全部</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Findex&status=0">未审核(0)</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Findex&status=1">已审核(0)</a>
+            </li>
+        </ul>
+    </div>
+    <table class="table table-bordered bg-white">
+        <tr>
+            <td style="text-align: left;">
+                <label class="checkbox-label">
+                    <input type="checkbox" class="goods-all">
+                    <span class="label-icon"></span>
+                    <span class="label-text">ID</span>
+                </label>
+            </td>
+            <td width="200px">微信信息</td>
+            <td>
+                <div>姓名</div>
+                <div>手机号</div>
+            </td>
+            <td>
+                <div>累计佣金</div>
+                <div>可提现佣金</div>
+            </td>
+            <td>推荐人</td>
+            <td>下级用户</td>
+            <td>状态</td>
+            <td>时间</td>
+            <td>会员订单</td>
+            <td>备注信息</td>
+            <td>操作</td>
+        </tr>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+
+    <!-- 下线 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="app" style="display: none;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">下线情况</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered ">
+                        <tr>
+                            <td>序号</td>
+                            <td>分销商</td>
+                            <td>下线等级</td>
+                            <td>昵称</td>
+                            <td>加入时间</td>
+                        </tr>
+                        <tr v-for="(item,index) in list">
+                            <td>{{index+1}}</td>
+                            <td>{{name}}</td>
+                            <td>{{level}}</td>
+                            <td>{{item.nickname}}</td>
+                            <td>{{item.time}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" id="myModal"
+ style="margin-top:200px;display: ;">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header" style="height:40px;">
+            <h5 class="modal-title" id="myModalLabel">
+                添加备注
+            </h5>
+        </div>
+        <div class="modal-body">
+            备注：<textarea name="seller_comments" id="seller_comments" cols="75" rows="5"
+                         style="resize: none;"></textarea>
+            <input type="hidden" value="" name="user_id" id="user_id">
+        </div>
+        <div class="modal-footer" style="height:40px;">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+            <button type="button" class="btn btn-primary" id="member" onclick="comments()">添加</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+.form-control {
+    /*height: 34px;*/
+}
+
+.form-group > div:first-child {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.form-group > div:last-child {
+    padding-left: 4px;
+}
+
+.middle-center {
+    /*line-height: 34px;*/
+}
+
+.w-20 {
+    width: 20rem;
+}
+
+.w-12 {
+    width: 12rem;
+}
+
+.status .nav-item,.bg-shaixuan {
+    background-color: #f8f8f8;
+}
+
+.status .nav-item .nav-link {
+    color: #464a4c;
+    border: 1px solid #ddd;
+    border-radius: 0;
+}
+
+.status .nav-item .nav-link.active {
+    border-color: #ddd #ddd #fff;
+    background-color: #fff;
+}
+</style>
+<script>
+jQuery.datetimepicker.setLocale('zh');
+jQuery('#date_start').datetimepicker({
+    datepicker: true,
+    timepicker: false,
+    format: 'Y-m-d',
+    dayOfWeekStart: 1,
+    scrollMonth: false,
+    scrollTime: false,
+    scrollInput: false,
+    onShow: function (ct) {
+        this.setOptions({
+            maxDate: jQuery('#date_end').val() ? jQuery('#date_end').val() : false
+        })
+    }
+});
+$(document).on('click', '#show_date_start', function () {
+    $('#date_start').datetimepicker('show');
+});
+jQuery('#date_end').datetimepicker({
+    datepicker: true,
+    timepicker: false,
+    format: 'Y-m-d',
+    dayOfWeekStart: 1,
+    scrollMonth: false,
+    scrollTime: false,
+    scrollInput: false,
+    onShow: function (ct) {
+        this.setOptions({
+            minDate: jQuery('#date_start').val() ? jQuery('#date_start').val() : false
+        })
+    }
+});
+$(document).on('click', '#show_date_end', function () {
+    $('#date_end').datetimepicker('show');
+});
+$(document).on('click', '.new-day', function () {
+    var index = $(this).data('index');
+    var myDate = new Date();
+    var mydate = new Date(myDate.getTime() - index * 24 * 60 * 60 * 1000);
+    jQuery('#date_start').datetimepicker('setOptions', {value: mydate});
+    jQuery('#date_end').datetimepicker('setOptions', {value: myDate});
+});
+</script>
+
+<script>
+var app = new Vue({
+    el: "#app",
+    data: {
+        team:[],
+        list: [],
+        name: "",
+        level: ""
+    }
+});
+$('#app').show();
+$(document).on('click', '.team', function () {
+    var index = $(this).data('index');
+    var level = $(this).data('level');
+    var team = app.team;
+    app.list = [];
+    app.name = '';
+    app.level = '';
+    $.each(team, function (i) {
+        if (team[i].id == index) {
+            if (level == 1) {
+                app.list = team[i].firstChildren;
+                app.level = "" || "一级";
+            }
+            if (level == 2) {
+                app.list = team[i].secondChildren;
+                app.level = "" || "二级";
+            }
+            if (level == 3) {
+                app.list = team[i].thirdChildren;
+                app.level = "" || "三级";
+            }
+            app.name = team[i].nickname;
+        }
+    })
+});
+
+function add_comments(id, seller_comments) {
+    $("#user_id").val(id);
+    $("#seller_comments").val(seller_comments);
+}
+
+var AddCommentsUrl = "/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fseller-comments";
+function comments() {
+    var user_id = $("#user_id").val();
+    var seller_comments = $("#seller_comments").val();
+    $.ajax({
+        url: AddCommentsUrl,
+        type: 'get',
+        dataType: 'json',
+        data: {
+            user_id: user_id,
+            seller_comments: seller_comments
+        },
+        success: function (res) {
+            if (res.code == 0) {
+                $('#myModal').css('display', 'none');
+                $.myAlert({
+                    content: "添加成功", confirm: function (e) {
+                        window.location.reload();
+                    }
+                });
+            } else {
+                $.myAlert({
+                    content: "添加失败"
+                });
+            }
+        }
+    });
+}
+</script>
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    $.myConfirm({
+        content: a.data('content'),
+        confirm: function () {
+            $.ajax({
+                url: a.data('url'),
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.myAlert({
+                            title: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+    return false;
+});
+
+$(document).on('click', '.goods-all', function () {
+    var checked = $(this).prop('checked');
+    $('.goods-one').prop('checked', checked);
+    if (checked) {
+        $('.batch').addClass('is_use');
+    } else {
+        $('.batch').removeClass('is_use');
+    }
+});
+$(document).on('click', '.goods-one', function () {
+    var checked = $(this).prop('checked');
+    var all = $('.goods-one');
+    var is_all = true;//只要有一个没选中，全选按钮就不选中
+    var is_use = false;//只要有一个选中，批量按妞就可以使用
+    all.each(function (i) {
+        if ($(all[i]).prop('checked')) {
+            is_use = true;
+        } else {
+            is_all = false;
+        }
+    });
+    if (is_all) {
+        $('.goods-all').prop('checked', true);
+    } else {
+        $('.goods-all').prop('checked', false);
+    }
+    if (is_use) {
+        $('.batch').addClass('is_use');
+    } else {
+        $('.batch').removeClass('is_use');
+    }
+});
+$(document).on('click', '.batch', function () {
+    var all = $('.goods-one');
+    var is_all = true;//只要有一个没选中，全选按钮就不选中
+    all.each(function (i) {
+        if ($(all[i]).prop('checked')) {
+            is_all = false;
+        }
+    });
+    if (is_all) {
+        $.myAlert({
+            content: "请先勾选商品"
+        });
+    }
+});
+$(document).on('click', '.is_use', function () {
+    var a = $(this);
+    var goods_group = [];
+    var all = $('.goods-one');
+
+    all.each(function (i) {
+        if ($(all[i]).prop('checked')) {
+            var goods = {};
+            goods.id = $(all[i]).val();
+            goods.user_id = $(all[i]).data('user_id');
+            goods_group.push(goods);
+        }
+    });
+    $.myConfirm({
+        content: a.data('content'),
+        confirm: function () {
+            $.myLoading();
+            $.ajax({
+                url: a.data('url'),
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    goods_group: goods_group,
+                    type: a.data('type'),
+                },
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+
+                    }
+                },
+                complete: function () {
+                    $.myLoadingHide();
+                }
+            });
+        }
+    })
+});
+</script>
+</div>
+</div>
+
+{/block}

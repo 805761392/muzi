@@ -1,0 +1,61 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+ <div class="panel-header">
+     <span>首页导航图标</span>
+     <ul class="nav nav-right">
+         <li class="nav-item">
+             <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fhome-nav-edit">添加图标</a>
+         </li>
+     </ul>
+ </div>
+ <div class="panel-body">
+     <table class="table table-bordered bg-white">
+         <thead>
+         <tr>
+             <th>ID</th>
+             <th>名称</th>
+             <th>图标</th>
+             <th>页面</th>
+             <th>排序</th>
+             <th>操作</th>
+         </tr>
+         </thead>
+         <tbody>
+                     </tbody>
+
+     </table>
+ </div>
+</div>
+
+<script>
+ $(document).on('click', '.nav-del', function () {
+     var a = $(this);
+     $.confirm({
+         content: "确认删除？",
+         confirm: function () {
+             $.loading();
+             $.ajax({
+                 url: a.attr("href"),
+                 dataType: "json",
+                 success: function (res) {
+                     $.loadingHide();
+                     $.alert({
+                         content: res.msg,
+                         confirm: function () {
+                             if (res.code == 0) {
+                                 location.reload();
+                             }
+                         }
+                     });
+                 }
+             });
+         }
+     });
+     return false;
+ });
+</script>    </div>
+</div>
+{/block}

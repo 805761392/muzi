@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {$title}
+        </title>
+        <meta name="keywords" content="公众号管理平台,微活动,微社区,微会员卡,微信优惠券,微众筹,微信Wifi,微商城,微信签到,微信场景,微信收银,微砍价,微信游戏,微信积分,微分销,微信周边,周边商户,微酒店,微汽车,微服务"
+        />
+        <meta name="description" content="木子科技微信管理平台，简称木子微信，是一款微信公众平台管理系统，是国内最完善移动网站及移动互联网技术解决方案。"
+        />
+        <link rel="shortcut icon" href="http://wxoss.gxmuzi.com/images/global/ZGpj4EG9jhfUH9R0gsEwHJGYhhsULu.png"
+        />
+        <link href="__STATIC__/Css/bootstrap.min.css" rel="stylesheet">
+        <link href="__STATIC__/Css/common.css" rel="stylesheet">
+        <script type="text/javascript">
+            if (navigator.appName == 'Microsoft Internet Explorer') {
+                if (navigator.userAgent.indexOf("MSIE 5.0") > 0 || navigator.userAgent.indexOf("MSIE 6.0") > 0 || navigator.userAgent.indexOf("MSIE 7.0") > 0) {
+                    alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+                }
+            }
+            window.sysinfo = {
+                'uniacid': '322',
+                'acid': '322',
+                'uid': '300',
+                'isfounder': 0,
+                'family': 'x',
+                'siteroot': 'https://wx.gxmuzi.com/',
+                'siteurl': 'https://wx.gxmuzi.com/web/index.php?c=platform&a=cover&eid=2086&version_id=29',
+                'attachurl': 'http://wxoss.gxmuzi.com/',
+                'attachurl_local': 'https://wx.gxmuzi.com/attachment/',
+                'attachurl_remote': 'http://wxoss.gxmuzi.com/',
+                'module': {
+                    'url': '',
+                    'name': '1'
+                },
+                'cookie': {
+                    'pre': 'a936_'
+                },
+                'account': {
+                    "acid": "322",
+                    "uniacid": "322",
+                    "token": "5wi3qqzbbhrnluuetatpavtbllotufik",
+                    "encodingaeskey": "sJHZaXFyK44AHzPCbBab1taT8Z84DzADfz44pXD6x8a",
+                    "level": "1",
+                    "account": "",
+                    "original": "gh_6e69c6be746c",
+                    "key": "wxdd4b0d97978e7a4d",
+                    "secret": "337f95f2c3cebcee700d12d7fb6f9e96",
+                    "name": "Hey\u6298\u6263",
+                    "appdomain": "https:\/\/wx.gxmuzi.com\/app\/index.php",
+                    "encrypt_key": "wxdd4b0d97978e7a4d",
+                    "type": "4",
+                    "isconnect": "1",
+                    "isdeleted": "0",
+                    "endtime": "0",
+                    "uid": "1",
+                    "starttime": "0",
+                    "groups": [],
+                    "setting": {
+                        "uniacid": "322",
+                        "passport": "",
+                        "oauth": "",
+                        "jsauth_acid": "0",
+                        "uc": "",
+                        "notify": "",
+                        "creditnames": "",
+                        "creditbehaviors": "",
+                        "welcome": "",
+                        "default": "",
+                        "default_message": "",
+                        "shortcuts": "",
+                        "payment": {
+                            "wechat": {
+                                "account": "322",
+                                "mchid": "1500499542",
+                                "signkey": "ldtto9fm2ppjkldfjgtg43p53094ti34"
+                            }
+                        },
+                        "stat": "",
+                        "menuset": "",
+                        "default_site": null,
+                        "sync": "0",
+                        "recharge": "",
+                        "tplnotice": "",
+                        "grouplevel": "0",
+                        "mcplugin": "",
+                        "exchange_enable": "0",
+                        "coupon_type": "0",
+                        "statistics": "",
+                        "bind_domain": "",
+                        "comment_status": "0",
+                        "reply_setting": "0"
+                    },
+                    "grouplevel": "0",
+                    "logo": "headimg_322.jpg?time=1528542751",
+                    "qrcode": "qrcode_322.jpg?time=1528542751",
+                    "switchurl": ".\/index.php?c=account&a=display&do=switch&uniacid=322",
+                    "sms": 0,
+                    "setmeal": {
+                        "uid": -1,
+                        "username": "\u521b\u59cb\u4eba",
+                        "timelimit": "\u672a\u8bbe\u7f6e",
+                        "groupid": "-1",
+                        "groupname": "\u6240\u6709\u670d\u52a1"
+                    }
+                },
+                'server': {
+                    'php': '5.6.30'
+                },
+            };
+        </script>
+        <script>
+            var require = {
+                urlArgs: 'v=20170426'
+            };
+        </script>
+        <script type="text/javascript" src="__STATIC__/Scripts/jquery-1.11.1.min.js">
+        </script>
+        <script type="text/javascript" src="__STATIC__/Scripts/bootstrap.min.js">
+        </script>
+        <script type="text/javascript" src="__STATIC__/Scripts/util.js">
+        </script>
+        <script type="text/javascript" src="__STATIC__/Scripts/common.min.js">
+        </script>
+        <script type="text/javascript" src="__STATIC__/Scripts/require.js">
+        </script>
+    </head>
+
+    <body>
+        <div class="loader" style="display:none">
+            <div class="la-ball-clip-rotate">
+                <div>
+                </div>
+            </div>
+        </div>
+        <div data-skin="default" class="skin-default ">
+            <div class="head mixMenu-head">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container ">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="https://wx.gxmuzi.com/">
+                                <img src="__STATIC__/Picture/rxmq3nnf8fdg2qvuxpuxsxuumdbxux.png" class="pull-left"
+                                width="110px" height="35px">
+                                <span class="version hidden">
+                                    1.7.3
+                                </span>
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <style>
+                                .nav > li:hover .dropdown-menu {display: block;}
+                            </style>
+                            <ul class="nav navbar-nav  navbar-left">
+                                <li>
+                                    <a href="./index.php?c=account&a=display&do=platform&">
+                                        平台
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=module&a=display&">
+                                        应用
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=home&a=welcome&do=system&">
+                                        系统
+                                    </a>
+                                </li>
+                                <ul class="other nav navbar-nav navbar-left">
+                                </ul>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-left hidden">
+                                <li>
+                                    <a href="./index.php?c=account&a=display&do=platform&">
+                                        平台
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=home&a=welcome&do=platform&">
+                                        公众号
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=wxapp&a=display&do=home&">
+                                        小程序
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=module&a=display&">
+                                        应用
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="./index.php?c=home&a=welcome&do=system&">
+                                        系统
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right ">
+                                <li class="dropdown msg header-notice">
+                                    <a href="javascript:;" class="dropdown-toogle" data-toggle="dropdown">
+                                        <span class="wi wi-bell">
+
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="clearfix top">
+                                            消息
+                                            <a href="./index.php?c=message&a=notice" class="pull-right">
+                                                查看更多
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="wi wi-user color-gray">
+                                        </i>
+                                        HEY折扣
+                                        <span class="caret">
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu color-gray" role="menu">
+                                        <li>
+                                            <a href="./index.php?c=user&a=profile&" target="_blank">
+                                                <i class="wi wi-account color-gray">
+                                                </i>
+                                                我的账号
+                                            </a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li>
+                                            <a href="./index.php?c=system&a=updatecache&" target="_blank">
+                                                <i class="wi wi-cache color-gray">
+                                                </i>
+                                                更新缓存
+                                            </a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li>
+                                            <a href="http://www.muzi.com">
+                                                <i class="fa fa-sign-out color-gray">
+                                                </i>
+                                                退出系统
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="main">
+                <div class="container">
+                    <a href="javascript:;" class="js-big-main button-to-big color-gray" title="加宽">
+                        宽屏
+                    </a>
+                    <div class="panel panel-content main-panel-content ">
+                        <div class="content-head panel-heading main-panel-heading">
+                            <img src="__STATIC__/Picture/icon-custom.jpg" class="head-app-logo" onerror="this.src='__STATIC__/Images/gw-wx.gif'">
+                            <span class="font-lg">
+                                同城吃喝玩乐打折卡
+                            </span>
+                            <div class="pull-right related-info module-related-info">
+                              <span class="top-view">
+                                <a href="./index.php?c=account&a=display&do=switch&uniacid=322&version_id=29&type=4"
+                                title="Hey折扣 1.2" target="_blank">
+                                    <i class="wi wi-wxapp">
+                                    </i>
+                                    Hey折扣 1.2
+                                </a>
+                            </span>
+                            <span class="dropdown">
+                                <a href="javascript:;" class="dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="wi wi-angle-down">
+                                    </i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li>
+                                        <a href="./index.php?c=module&a=display&do=switch&uniacid=322&module_name=xfydm_wuzhe&version_id=29">
+                                            <span>
+                                                <i class="wi wi-wxapp">
+                                                </i>
+                                                Hey折扣 1.2
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </span>
+                            </div>
+                            <script>
+                                $.post('./index.php?c=module&a=display&do=accounts_dropdown_menu', {
+                                    'module_name': "xfydm_wuzhe",
+                                    'version_id': "29"
+                                },
+                                function(data) {
+                                    $('.module-related-info').html(data);
+                                },
+                                'html');
+                            </script>
+                            <!-- 兼容历史性问题：模块内获取不到模块信息$module的问题-start -->
+                            <!-- end -->
+                        </div>
+                        <div class="panel-body clearfix main-panel-body ">
+                            <div class="left-menu">
+                                <div class="left-menu-content">
+                                    <div class="panel panel-menu">
+                                        <ul class="list-group">
+                                            {if $title == '应用入口'}
+                                            <li class="list-group-item active">
+                                            {else /}
+                                            <li class="list-group-item">
+                                            {/if}
+                                                <a href="./platform" class="text-over">
+                                                    <i class='wi wi-reply'></i>应用入口
+                                                </a>
+                                            </li>
+                                            {if $title == '参数设置'}
+                                            <li class="list-group-item active">
+                                            {else /}
+                                            <li class="list-group-item">
+                                            {/if}
+                                                <a href="./setting"class="text-over">
+                                                    <i class='fa fa-cog'></i>参数设置
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel panel-menu">
+                                        <div class="panel-heading">
+                                            <span class="no-collapse">
+                                                业务菜单
+                                                <i class="wi wi-appsetting pull-right setting">
+                                                </i>
+                                            </span>
+                                        </div>
+                                        <ul class="list-group">
+                                            {volist name='menuList' id='vo'}
+                                            {if $vo.name == $title}
+                                            <li class="list-group-item active">
+                                            {else /}
+                                            <li class="list-group-item">
+                                            {/if}
+                                                <a href="./{$vo.action}" class="text-over">
+                                                    <i class='wi wi-appsetting'></i>{$vo.name}
+                                                </a>
+                                            </li>
+                                            {/volist}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {block name='content'}
+                            页面内容 right-content
+                            {/block}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid footer text-center" role="footer">
+                <div class="friend-link">
+                    <br />
+                </div>
+                <div class="copyright">
+                    <br />
+                </div>
+            </div>
+            <script>
+                var _hmt = _hmt || []; (function() {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?3a9afbf5e81a468a154cdeb09b689672";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+            </script>
+            <script>
+                if (typeof $.fn.tooltip != 'function' || typeof $.fn.tab != 'function' || typeof $.fn.modal != 'function' || typeof $.fn.dropdown != 'function') {
+                    require(['bootstrap']);
+                }
+            </script>
+        </div>
+        <!-- <script type="text/javascript" src="__STATIC__/Scripts/index.js">
+        </script> -->
+        <script>
+            $(function() {
+                $('img').attr('onerror', '').on('error',
+                function() {
+                    if (!$(this).data('check-src') && (this.src.indexOf('http://') > -1 || this.src.indexOf('https://') > -1)) {
+                        this.src = this.src.indexOf('https://wx.gxmuzi.com/attachment/') == -1 ? this.src.replace('http://wxoss.gxmuzi.com/', 'https://wx.gxmuzi.com/attachment/') : this.src.replace('https://wx.gxmuzi.com/attachment/', 'http://wxoss.gxmuzi.com/');
+                        $(this).data('check-src', true);
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,42 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div style="height: 0;overflow: hidden">
+<script language="JavaScript" src="Scripts/lodopfuncs.js"></script>
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
+</div>
+
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>面单打印设置项</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fexpress-edit">添加设置项</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:" data-toggle="modal" data-target="#sender">设置发件人信息</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="javascript:" onclick="CheckIsInstall()">检测是否安装打印插件</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <tr>
+            <th>快递公司</th>
+            <th>网点名称</th>
+            <th>网点编码</th>
+            <th>客户号</th>
+            <th>发件人信息</th>
+            <th>操作</th>
+        </tr>
+                </table>
+    <div class="text-center">
+                </div>
+</div>
+</div>
+{/block}

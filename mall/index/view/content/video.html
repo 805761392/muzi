@@ -1,0 +1,44 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">
+    <span>视频管理</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="http://wx.gxmuzi.com/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fvideo-edit">添加视频</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <div style="overflow-x: hidden">
+        <div class="row">
+                        </div>
+    </div>
+    <nav aria-label="Page navigation example">
+                </nav>
+</div>
+</div>
+<script>
+$(document).on('click', '.del', function () {
+    var href = $(this).attr('href');
+    $.confirm({
+        content: '是否删除？',
+        confirm: function () {
+            $.loading();
+            $.ajax({
+                url: href,
+                type: 'get',
+                dataType: 'json',
+                success: function (res) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>
+</div>
+</div>
+{/block}

@@ -1,0 +1,281 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <style>
+.page-list > li {
+    margin-bottom: 1rem;
+}
+</style>
+<div class="alert alert-warning rounded-0">
+页面参数使用示例：订单列表，需要查询状态是已完成的订单，则拼接参数后的路径为<span class="text-danger">pages/order/order?status=3</span>
+</div>
+<div class="panel">
+<div class="panel-header">小程序页面</div>
+<div class="panel-body">
+    <ul class="page-list">
+                        <li>
+                <div class="text-primary">商城首页</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/index/index</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">分类</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/cat/cat</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">购物车</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/cart/cart</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">用户中心</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/user/user</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">商品列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/list/list</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">cat_id</span>
+                            <span class="text-muted mr-3">分类id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">搜索页</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/search/search</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">商品详情</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/goods/goods</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">id</span>
+                            <span class="text-muted mr-3">商品id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">订单列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/order/order</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">status</span>
+                            <span class="text-muted mr-3">订单状态[所有订单=-1,待付款=0,待发货=1,待收货=2,已完成=3,售后=4]</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">我的收藏</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/favorite/favorite</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">分销中心</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/share/index</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">关于我们</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/article-detail/article-detail</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">id=about_us</span>
+                            <span class="text-muted mr-3"></span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">服务中心</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/article-list/article-list</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">id=2</span>
+                            <span class="text-muted mr-3"></span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">我的优惠券</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/coupon/coupon</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">门店列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/shop/shop</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">视频列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/video/video-list</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">领券中心</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/coupon-list/coupon-list</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">专题列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/topic-list/topic-list</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">专题详情</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/topic/topic</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">id</span>
+                            <span class="text-muted mr-3">专题id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">秒杀</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/miaosha/miaosha</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">小程序内嵌网页</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/web/web</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">url</span>
+                            <span class="text-muted mr-3">网址(网址必须UrlEncode，域名必须在小程序官方后台设置业务域名)</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">门店详情</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/shop-detail/shop-detail</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">shop_id</span>
+                            <span class="text-muted mr-3">门店id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">我的卡券</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/card/card</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">status</span>
+                            <span class="text-muted mr-3">卡券状态(选填)[已失效=2]</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">拼团首页</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/pt/index/index</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">拼团商品详情</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/pt/details/details</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">gid</span>
+                            <span class="text-muted mr-3">拼团商品id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">拼团订单列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/pt/order/order</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">status</span>
+                            <span class="text-muted mr-3">订单状态(选填)[全部=-1,待付款=0,拼团中=1,拼团成功=2,拼团失败=3,售后=4]</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">预约首页</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/book/index/index</span>
+                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">预约详情</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/book/details/details</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">id</span>
+                            <span class="text-muted mr-3">预约id</span>
+                                                </div>
+                                </li>
+                        <li>
+                <div class="text-primary">我的预约列表</div>
+                <div>
+                    <span>路径：</span>
+                    <span class="text-primary">pages/book/order/order</span>
+                </div>
+                                        <div>
+                        <span>参数：</span>
+                                                        <span class="text-primary">status</span>
+                            <span class="text-muted mr-3">状态(选填)[待支付=0,待使用=1,已使用=2,退款=3]</span>
+                                                </div>
+                                </li>
+                </ul>
+</div>
+</div>    </div>
+</div>
+{/block}

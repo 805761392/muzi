@@ -1,0 +1,75 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <style>
+.cover-pic {
+    display: block;
+    width: 8rem;
+    height: 5rem;
+    background-size: cover;
+    background-position: center;
+}
+</style>
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>专题</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Ftopic%2Fedit">添加专题</a>
+        </li>
+    </ul>
+</div>
+
+<form method="get">
+                        <input type="hidden" name="r" value="mch/topic/index">
+
+    <div>
+        <select style="display:inline;max-width:10%" class="form-control" name="type">
+            <option value=0 selected >全部</option>
+                        </select>
+        <button style="margin-bottom: 6px;margin-left:30px" class="btn btn-primary mr-4">筛选</button>
+    </div>
+</form>
+
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th style="min-width:60px">分类</th>
+            <th>封面图</th>
+            <th>专题</th>
+            <th>是否精选</th>
+            <th class="text-center">排序</th>
+            <th class="text-center">布局方式</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+</div>
+</div>
+
+<script>
+$(document).on("click", ".delete-btn", function () {
+    var url = $(this).attr("href");
+    $.confirm({
+        content: "确认删除？",
+        confirm: function () {
+            $.loading();
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (res) {
+                    location.reload();
+                }
+            });
+        }
+    });
+    return false;
+});
+</script>    </div>
+</div>
+{/block}

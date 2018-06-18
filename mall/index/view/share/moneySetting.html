@@ -1,0 +1,25 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">佣金设置</div>
+<div class="panel-body">
+    <form class="form auto-form" method="post" autocomplete="off" style="max-width: 50rem;">
+        <div class="form-body">
+                        </div>
+
+    </form>
+</div>
+</div>
+<script>
+$(document).on('click', '.price_type', function () {
+    var price_type = $(this).children('input');
+    if ($(price_type).val() == 1) {
+        $('.percent').html('元');
+    } else {
+        $('.percent').html('%');
+    }
+});
+</script>    </div>
+</div>
+{/block}

@@ -1,0 +1,731 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <style>
+        .news { border: 1px solid orangered; padding-top: 10px; margin-bottom:
+        10px; } .lyg_dis{ display:none; }
+    </style>
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="./index.php?c=site&a=entry&op=list&do=wuzhe&m=xfydm_wuzhe">
+                销量统计
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=info&do=wuzhe&m=xfydm_wuzhe">
+                五折卡列表
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=add&do=wuzhe&m=xfydm_wuzhe">
+                添加五折卡
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=tiyan_list&do=wuzhe&m=xfydm_wuzhe">
+                体验卡列表
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=tiyan&do=wuzhe&m=xfydm_wuzhe">
+                体验卡生成
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=hxjl&do=wuzhe&m=xfydm_wuzhe">
+                核销记录
+            </a>
+        </li>
+    </ul>
+    <div class="main">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                统计
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form-horizontal" role="form" id="form1">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            起止时间
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <script type="text/javascript">
+                                require(["daterangepicker"],
+                                function() {
+                                    $(function() {
+                                        $(".daterange.daterange-time").each(function() {
+                                            var elm = this;
+                                            $(this).daterangepicker({
+                                                startDate: $(elm).prev().prev().val(),
+                                                endDate: $(elm).prev().val(),
+                                                format: "YYYY-MM-DD HH:mm",
+                                                timePicker: true,
+                                                timePicker12Hour: false,
+                                                timePickerIncrement: 1,
+                                                minuteStep: 1
+                                            },
+                                            function(start, end) {
+                                                $(elm).find(".date-title").html(start.toDateTimeStr() + " 至 " + end.toDateTimeStr());
+                                                $(elm).prev().prev().val(start.toDateTimeStr());
+                                                $(elm).prev().val(end.toDateTimeStr());
+                                            });
+                                        });
+                                    });
+                                });
+                            </script>
+                            <input name="times[start]" type="hidden" value="2018-05-17 18:13" />
+                            <input name="times[end]" type="hidden" value="2018-07-16 18:13" />
+                            <button class="btn btn-default daterange daterange-time" type="button">
+                                <span class="date-title">
+                                    2018-05-17 18:13 至 2018-07-16 18:13
+                                </span>
+                                <i class="fa fa-calendar">
+                                </i>
+                            </button>
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="submit" class="btn btn-default" name="update" value="搜索">
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2 col-lg-2">
+                                <a href="./index.php?c=site&a=entry&op=clear&do=wuzhe&m=xfydm_wuzhe" class="btn btn-default">
+                                    删除未支付
+                                </a>
+                            </div>
+                            <div class="col-sm-2 col-lg-2" style="line-height:40px;">
+                                销售金额：0.13
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                导出表格
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form-horizontal" role="form" id="form1">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            起止时间
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input name="timess[start]" type="hidden" value="2018-05-17 18:13" />
+                            <input name="timess[end]" type="hidden" value="2018-07-16 18:13" />
+                            <button class="btn btn-default daterange daterange-time" type="button">
+                                <span class="date-title">
+                                    2018-05-17 18:13 至 2018-07-16 18:13
+                                </span>
+                                <i class="fa fa-calendar">
+                                </i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                                特殊购买订单
+                            </label>
+                            <div class="col-sm-4 col-lg-4 col-xs-12">
+                                <select name="type" class='form-control' id="col">
+                                    <option value="1">
+                                        未支付
+                                    </option>
+                                    <option value="2">
+                                        已支付
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="submit" class="btn btn-default" name="down" value="导出到表格">
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="category">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    销售列表
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th style="text-align: center;width:200px;">
+                                    用户昵称
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    用户头像
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    购买时间
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    支付状态
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    来源商家
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    支付类型
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    购买金额
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+<tr style="text-align: center">
+    <td>
+        <div class="type-parent">
+        </div>
+    </td>
+    <td>
+        <img src="__STATIC__/Picture/4f29465d48424cd891fc7691a614a769.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+    </td>
+    <td>
+        <div class="type-parent" style="overflow:hidden;">
+            2018-06-14 11:45:21
+        </div>
+    </td>
+    <td>
+        <div class="type-parent" style="overflow:hidden;">
+            未支付
+        </div>
+    </td>
+    <td>
+        <div class="type-parent" style="overflow:hidden;">
+        </div>
+    </td>
+    <td>
+        <div class="type-parent" style="overflow:hidden;">
+            余额购买
+        </div>
+    </td>
+    <td>
+        <div class="type-parent" style="overflow:hidden;">
+            ¥0.01
+        </div>
+    </td>
+    <td style="text-align: center">
+        <a href="javascript:delplayer(1867)">
+            <button class="btn btn-danger">
+                删除
+            </button>
+        </a>
+    </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      机智的大毛君
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/c05e788d6ff84bcb8d02b1e051ab7f04.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-14 16:50:18
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      无
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1870)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      五了
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/77964520e43a41879021cc1bc340708b.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-13 17:15:48
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      无
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1865)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      丽丽-木子科技
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/9fc46fc34f2a4f75b00d312da6240c05.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-13 17:13:25
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      中国电信
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1864)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      你看不见我，
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/b0d397af645a4ae3bfa79e6f1454c2d0.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-12 10:51:28
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      中国电信
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1859)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+    </div>
+  </td>
+  <td>
+    <img src="" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-12 10:49:22
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      无
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1858)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      你看不见我，
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/b0d397af645a4ae3bfa79e6f1454c2d0.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-12 10:45:39
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      中国电信
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1857)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      五了
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/77964520e43a41879021cc1bc340708b.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-08 15:22:26
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1854)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      idiot away
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/90bd7ebf274f43059e598b081bdd2885.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-08 11:00:59
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      无
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1850)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+<tr style="text-align: center">
+  <td>
+    <div class="type-parent">
+      振霆
+    </div>
+  </td>
+  <td>
+    <img src="__STATIC__/Picture/4f29465d48424cd891fc7691a614a769.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      2018-06-08 10:57:16
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      已支付
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      无
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      余额购买
+    </div>
+  </td>
+  <td>
+    <div class="type-parent" style="overflow:hidden;">
+      ¥0.01
+    </div>
+  </td>
+  <td style="text-align: center">
+    <a href="javascript:delplayer(1849)">
+      <button class="btn btn-danger">
+        删除
+      </button>
+    </a>
+  </td>
+</tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <ul class="pagination pagination-centered">
+                    <li class="active">
+                        <a href="javascript:;">
+                            1
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?c=site&a=entry&eid=2091&version_id=29&page=2">
+                            2
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/web/index.php?c=site&a=entry&eid=2091&version_id=29&page=2"
+                        class="pager-nav">
+                            下一页&raquo;
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/web/index.php?c=site&a=entry&eid=2091&version_id=29&page=2"
+                        class="pager-nav">
+                            尾页
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function is_lyg1() {
+                $(".lyg_num").removeClass("lyg_dis");
+            }
+            function is_lyg2() {
+                $(".lyg_num").addClass("lyg_dis");
+            }
+        </script>
+        <script type="text/javascript">
+            function delplayer(id) {
+                var alt = confirm("确定删除订单？");
+                if (alt) {
+                    $.post("./index.php?c=site&a=entry&op=del&do=wuzhe&m=xfydm_wuzhe", {
+                        id: id
+                    },
+                    function(res) {
+                        if (res.data != 0) {
+                            util.message('操作失败, 请稍后重试.')
+                        } else {
+                            util.message('操作成功', location.href, 'success');
+                        }
+                    },
+                    'json');
+                }
+            }
+            function delwuzhe(id) {
+                var alt = confirm("确定删除五折卡？");
+                if (alt) {
+                    $.post("./index.php?c=site&a=entry&op=dell&do=wuzhe&m=xfydm_wuzhe", {
+                        id: id
+                    },
+                    function(res) {
+                        if (res.data != 0) {
+                            util.message('操作失败, 请稍后重试.')
+                        } else {
+                            util.message('操作成功', location.href, 'success');
+                        }
+                    },
+                    'json');
+                }
+            }
+
+            function onAdd2() {
+
+                $('#after').before('<div class="news">' + $('#news').html() + '</div>');
+            }
+        </script>
+        <script type="text/javascript">
+            // function tiyan(){
+            //     var number = $(".ty_number").val();
+            //     var day = $(".ty_day").val();
+            //     $.post("./index.php?c=site&a=entry&op=tiyan&do=wuzhe&m=xfydm_wuzhe", {number: number,day:day}, function (res) {
+            //             if (res.data != 0) {
+            //                 util.message('操作失败, 请稍后重试.')
+            //             } else {
+            //                 util.message('操作成功', location.href, 'success');
+            //             }
+            //         }, 'json');
+            // }
+
+        </script>
+        <script type="text/javascript">
+            function check1(obj) {
+                // $(obj).checked = true;
+                // $(obj).parent().next().children().checked = false;
+                alert(1)
+            }
+        </script>
+        <script type="text/javascript">
+            function clear1() {
+                // alert(1)
+                $.ajax({
+                    type: "POST",
+                    url: "./index.php?c=site&a=entry&do=wuzhe_op&m=xfydm_wuzhe",
+                    data: {
+                        op: "clear",
+                    },
+                    success: function(data) {
+                        var res = eval("(" + data + ")");
+                        if (res.data == 1) {
+                            util.message('删除成功', location.href, 'success');
+                        } else {
+                            util.message('删除失败, 请稍后重试.')
+                        }
+                    }
+                },
+                'json');
+            }
+        </script>
+        <script type="text/javascript">
+            function isxg() {
+                if ($(this).is(":checked")) {
+                    alert(1)
+                }
+            }
+        </script>
+    </div>
+</div>
+{/block}

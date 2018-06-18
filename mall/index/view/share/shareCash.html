@@ -1,0 +1,206 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">提现列表</div>
+<div class="panel-body">
+    <div class="mb-3 clearfix">
+        <div class="p-4 bg-shaixuan">
+            <form method="get">
+
+                                                            <input type="hidden" name="r" value="mch/share/cash">
+                                    <div flex="dir:left">
+                    <div>
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="姓名/微信昵称"
+                                   name="keyword"
+                                   autocomplete="off"
+                                   value="">
+                <span class="input-group-btn">
+                <button class="btn btn-primary">搜索</button>
+            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="mb-4">
+        <ul class="nav nav-tabs status">
+            <li class="nav-item">
+                <a class="status-item nav-link active"
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fcash">全部</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fcash&status=0">未审核</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fcash&status=1">待打款</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fcash&status=2">已打款</a>
+            </li>
+            <li class="nav-item">
+                <a class="status-item nav-link "
+                   href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Fcash&status=3">无效</a>
+            </li>
+        </ul>
+    </div>
+    <table class="table table-bordered bg-white">
+        <tr>
+            <td width="50px">ID</td>
+            <td width="200px">微信信息</td>
+            <td>账号信息</td>
+            <td>提现金额（元）</td>
+            <td>状态</td>
+            <td>申请时间</td>
+            <td>操作</td>
+        </tr>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+</div>
+</div>
+<style>
+.form-control {
+    /*height: 34px;*/
+}
+
+.form-group > div:first-child {
+    padding-right: 4px;
+    text-align: right;
+}
+
+.form-group > div:last-child {
+    padding-left: 4px;
+}
+
+.middle-center {
+    /*line-height: 34px;*/
+}
+
+.w-20 {
+    width: 20rem;
+}
+
+.w-12 {
+    width: 12rem;
+}
+
+.status .nav-item,.bg-shaixuan {
+    background-color: #f8f8f8;
+}
+
+.status .nav-item .nav-link {
+    color: #464a4c;
+    border: 1px solid #ddd;
+    border-radius: 0;
+}
+
+.status .nav-item .nav-link.active {
+    border-color: #ddd #ddd #fff;
+    background-color: #fff;
+}
+</style>
+<script>
+jQuery.datetimepicker.setLocale('zh');
+jQuery('#date_start').datetimepicker({
+    datepicker: true,
+    timepicker: false,
+    format: 'Y-m-d',
+    dayOfWeekStart: 1,
+    scrollMonth: false,
+    scrollTime: false,
+    scrollInput: false,
+    onShow: function (ct) {
+        this.setOptions({
+            maxDate: jQuery('#date_end').val() ? jQuery('#date_end').val() : false
+        })
+    }
+});
+$(document).on('click', '#show_date_start', function () {
+    $('#date_start').datetimepicker('show');
+});
+jQuery('#date_end').datetimepicker({
+    datepicker: true,
+    timepicker: false,
+    format: 'Y-m-d',
+    dayOfWeekStart: 1,
+    scrollMonth: false,
+    scrollTime: false,
+    scrollInput: false,
+    onShow: function (ct) {
+        this.setOptions({
+            minDate: jQuery('#date_start').val() ? jQuery('#date_start').val() : false
+        })
+    }
+});
+$(document).on('click', '#show_date_end', function () {
+    $('#date_end').datetimepicker('show');
+});
+$(document).on('click', '.new-day', function () {
+    var index = $(this).data('index');
+    var myDate = new Date();
+    var mydate = new Date(myDate.getTime() - index * 24 * 60 * 60 * 1000);
+    jQuery('#date_start').datetimepicker('setOptions', {value: mydate});
+    jQuery('#date_end').datetimepicker('setOptions', {value: myDate});
+});
+</script>
+
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    if (confirm(a.data('content'))) {
+        a.btnLoading();
+        $.ajax({
+            url: a.data('url'),
+            type: 'get',
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 0) {
+                    window.location.reload();
+                } else {
+                    $.myAlert({
+                        content: res.msg
+                    });
+                    a.btnReset();
+                }
+            }
+        });
+    }
+    return false;
+});
+</script>
+<script>
+$(document).on('click', '.pay', function () {
+    var a = $(this);
+    var btn = $('.pay');
+    if (confirm(a.data('content'))) {
+        btn.btnLoading();
+        $.ajax({
+            url: a.data('url'),
+            type: 'get',
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 0) {
+                    window.location.reload();
+                } else {
+                    $.myAlert({
+                        content: res.msg
+                    });
+                    btn.btnReset();
+                }
+            }
+        });
+    }
+    return false;
+});
+</script>    </div>
+</div>
+{/block}

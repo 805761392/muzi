@@ -1,0 +1,97 @@
+﻿{include file='public/head' /}
+<body>
+	<div class="loader" style="display:none">
+		<div class="la-ball-clip-rotate">
+			<div></div>
+		</div>
+	</div><div class="system-login"  style="background-image: url('__STATIC__/Images/bg-login.png');" >
+
+	<div class="head">
+		<a href="/" class="logo-version">
+			<img src="__STATIC__/Picture/rxmq3nnf8fdg2qvuxpuxsxuumdbxux.png" class="logo">
+			<span class="version hidden">1.7.3</span>
+		</a>
+				<a href="{:url('index/index')}" class="pull-right">首页</a>
+			</div>
+	<div class="login-panel">
+		<div class="title">
+			<a href="{:url('User/login')}" class="active" >账号密码</a>
+					</div>
+		<form action="" method="post" role="form" id="form" onsubmit="" class="we7-form">
+						<div class="input-group-vertical">
+				<input name="login_type" type="hidden" class="form-control " value="system">
+				<input name="name" type="text" class="form-control " placeholder="请输入用户名登录">
+				<input name="password" type="password" class="form-control password" placeholder="请输入登录密码">
+							</div>
+									<div class="form-inline" style="margin-bottom: 15px;">
+				<div class="pull-right">
+					<a href="{:url('User/find_password')}" target="_blank" class="color-default">忘记密码？</a>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" value="true" id="rember" name="rember">
+					<label for="rember">记住用户名</label>
+				</div>
+			</div>
+			<div class="login-submit text-center">
+				<input type="button" id="login" name="login" value="登录" class="btn btn-primary btn-block" />
+				<div class="text-right">
+																	<a href="{:url('User/register')}" class="color-default">立即注册</a>
+																					</div>
+				<input name="token" value="ce5e2724" type="hidden" />
+			</div>
+					</form>
+	</div>
+</div>
+</div>
+	<div class="container-fluid footer text-center" role="footer">
+		<div class="friend-link">
+							<br />					</div>
+		<div class="copyright"><br /></div>
+			</div>
+	<script>
+		$(function(){
+		    $('#login').on('click', function(){
+		        $.ajax({
+					type: 'POST',
+					url: "{:url('checkLogin')}",
+					data: $('form').serialize(),
+					dataType: 'json',
+					success: function(data){
+						if (data.status == 1) {
+						    alert(data.message);
+						} else {
+								window.location.href="{:url('system/home')}";
+						}
+					}
+				});
+			})
+		});
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3a9afbf5e81a468a154cdeb09b689672";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>		</div>
+
+
+
+<script>$(function(){$('img').attr('onerror', '').on('error', function(){if (!$(this).data('check-src') && (this.src.indexOf('http://') > -1 || this.src.indexOf('https://') > -1)) {this.src = this.src.indexOf('https://wx.gxmuzi.com/attachment/') == -1 ? this.src.replace('http://wxoss.gxmuzi.com/', 'https://wx.gxmuzi.com/attachment/') : this.src.replace('https://wx.gxmuzi.com/attachment/', 'http://wxoss.gxmuzi.com/');$(this).data('check-src', true);}});});</script></body>
+</html><script>
+function formcheck() {
+	if($('#remember:checked').length == 1) {
+		cookie.set('remember-username', $(':text[name="username"]').val());
+	} else {
+		cookie.del('remember-username');
+	}
+	return true;
+}
+var h = document.documentElement.clientHeight;
+$(".system-login").css('height',h);
+$('#toggle').click(function() {
+	$('#imgverify').prop('src', './index.php?c=utility&a=code&r='+Math.round(new Date().getTime()));
+	return false;
+});
+</script>

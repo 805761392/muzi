@@ -1,0 +1,131 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <style>
+.city-list{
+    z-index: 999;
+}
+.more{
+    font-size: 21px;
+}
+
+</style>
+
+<div class="panel mb-3" id="app">
+<div class="panel-header">区域允许购买</div>
+<div class="panel-body">
+    <form class="auto-form" method="post">
+        <div class="form-group row">
+            <div class="form-group-label col-sm-2 text-right">
+                <label class="col-form-label">是否开启</label>
+            </div>
+            <div class="col-sm-6">
+                <label class="radio-label">
+                    <input checked                            value="1"
+                        name="is_enable"
+                        type="radio"
+                        class="custom-control-input">
+                    <span class="label-icon"></span>
+                    <span class="label-text">开启</span>
+                </label>
+                <label class="radio-label">
+                    <input checked                            value="0"
+                        name="is_enable"
+                        type="radio"
+                        class="custom-control-input">
+                    <span class="label-icon"></span>
+                    <span class="label-text">关闭</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label col-sm-2 text-right">
+                <label class="col-form-label">允许购买区域</label>
+            </div>
+            <div class="col-sm-6 col-form-label">
+                <div class="card mb-3" v-for="(item,index) in detail">
+                    <div class="card-block">
+                        <div class="mb-3">
+                            <a class="del-rules-btn float-right" href="javascript:" v-bind:data-index="index">[-删除条目]</a>
+                        </div>
+                        <div>
+                            <span>省份：</span>
+                            <span v-for="(province,p_index) in item.province_list">
+                                <span>{{province.name}}</span>
+                                <input type="hidden"
+                                       v-bind:name="'detail['+index+'][province_list]['+p_index+'][id]'"
+                                       v-model="province.id">
+                                <input type="hidden"
+                                       v-bind:name="'detail['+index+'][province_list]['+p_index+'][name]'"
+                                       v-model="province.name">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <a class="show-rules-modal" href="javascript:">[+新增条目]</a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label col-sm-2 text-right">
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-primary auto-form-btn" href="javascript:">保存</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade rules-modal bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>添加区域</b>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b>省份</b>
+                    <div class="row">
+                        <div class="col-sm-4" v-for="(province,index) in province_list" v-if="province.selected!=true">
+                            <label>
+                                <input name="province"
+                                       v-bind:id="'index_'+index"
+                                       v-bind:data-index="index"
+                                       v-bind:data-id="province.id"
+                                       v-bind:data-name="province.name" v-bind:checked="province.show" type="checkbox">
+                                {{province.name}}
+                                <a data-toggle="collapse" v-bind:href="'#collapseExample'+index" role="button" aria-expanded="true" aria-controls="collapseExample" class="more">+</a>
+                            </label>
+                            <div class="collapse" v-bind:id="'collapseExample'+index">
+                                <div class="card card-body">
+                                    <div class="row">
+                                        <div class="col-6" v-for="(city,c_index) in province.city" v-if="city.selected!=true">
+                                            <label>
+                                                <input name="city"
+                                                       v-bind:id="'index_'+c_index"
+                                                       v-bind:data-index="c_index"
+                                                       v-bind:data-p_index="index"
+                                                       v-bind:data-id="city.id"
+                                                       v-bind:data-name="city.name" v-bind:checked="city.show" type="checkbox">
+                                                {{city.name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary add-rules-btn">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+{/block}

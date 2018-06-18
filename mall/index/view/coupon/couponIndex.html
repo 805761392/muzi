@@ -1,0 +1,53 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+     <div class="panel mb-3">
+ <div class="panel-header">优惠券管理</div>
+ <div class="panel-body">
+     <a class="btn btn-primary mb-3" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fcoupon%2Fedit">添加优惠券</a>
+     <table class="table table-bordered bg-white">
+         <thead>
+         <tr>
+             <th>ID</th>
+             <th>优惠券名称</th>
+             <th>最低消费金额（元）</th>
+             <th>优惠方式</th>
+             <th>有效时间</th>
+             <th>数量</th>
+             <th>加入领券中心</th>
+             <th>排序</th>
+             <th>操作</th>
+         </tr>
+         </thead>
+                 </table>
+ </div>
+</div>
+<script>
+ $(document).on("click", ".delete-confirm", function () {
+     var url = $(this).attr("href");
+     $.myConfirm({
+         content: "确认删除？",
+         confirm: function () {
+             $.myLoading();
+             $.ajax({
+                 url: url,
+                 dataType: "json",
+                 success: function (res) {
+                     if (res.code == 0) {
+                         location.reload();
+                     } else {
+                         $.myLoadingHide();
+                         $.myAlert({
+                             content: res.msg,
+                         });
+                     }
+                 }
+             });
+         },
+     });
+     return false;
+ });
+</script>    </div>
+</div>
+
+{/block}

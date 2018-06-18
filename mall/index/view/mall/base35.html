@@ -1,0 +1,92 @@
+
+<div class="sidebar sidebar-sub" id="sidebar">
+<div class="sidebar-1">
+<div class="logo">
+<a class="home-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fdefault%2Findex">HEY折扣商家</a>
+</div>
+<div>
+<a class="nav-item active" href="/mall.php/index/mall/wechatSetting"> <span class="nav-icon iconfont icon-setup"></span> <span>商城管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fgoods%2Fgoods"> <span class="nav-icon iconfont icon-service"></span> <span>商品管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Forder%2Findex"> <span class="nav-icon iconfont icon-activity"></span> <span>订单管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Findex"> <span class="nav-icon iconfont icon-people"></span> <span>用户管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fshare%2Findex"> <span class="nav-icon iconfont icon-jiegou"></span> <span>分销中心</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Farticle%2Findex"> <span class="nav-icon iconfont icon-barrage"></span> <span>内容管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fcoupon%2Findex"> <span class="nav-icon iconfont icon-coupons"></span> <span>营销管理</span> </a>
+<a class="nav-item " href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fmiaosha%2Findex"> <span class="nav-icon iconfont icon-pintu-m"></span> <span>应用专区</span> </a>
+</div>
+</div>
+<div class="sidebar-2">
+<div class="current-menu-name">商城管理</div>
+<div class="sidebar-content">
+<a class="nav-item active" href="javascript:"> <span class="nav-pointer iconfont icon-play_fill"></span> <span>系统设置</span> </a>
+<div class="sub-item-list">
+<a class="nav-item " href="/mall.php/index/mall/wechatSetting" id="wechatSetting"> <span>微信配置</span> </a>
+<a class="nav-item  active" href="/mall.php/index/mall/mallSetting" > <span>商城设置</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/tplSetting"> <span>模板消息</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/sms"> <span>短信通知</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/mail"> <span>邮件通知</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/postage_rules"> <span>运费规则</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/free_delivery_rules"> <span>包邮规则</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/express"> <span>快递单打印</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/ticket"> <span>小票打印</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/region_limitation"> <span>区域限制购买</span> </a>
+</div>
+<a class="nav-item" href="javascript:"> <span class="nav-pointer iconfont icon-play_fill"></span> <span>小程序设置</span> </a>
+<div class="sub-item-list">
+<a class="nav-item" href="/mall.php/index/mall/slide"> <span>轮播图</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/home_nav"> <span>导航图标</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>图片魔方</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>导航栏</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>首页布局</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>用户中心</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>下单表单</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>小程序页面</span> </a>
+</div>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>版权设置</span> </a>
+<a class="nav-item " href="/mall.php/index/mall/"> <span>消息提醒</span> </a>
+</div>
+</div>
+</div>
+
+
+
+$sidebar1 = BaseModel::query('select * from sidebar where level = 1 order by id');
+for($i=0;$i<count($sidebar1);$i++)
+{
+  $sidebar1[$i]['class'] = 'nav-item';
+  if($sidebar1[$i]['name'] == "商城管理"){
+    $sidebar1[$i]['class'] = 'nav-item active';
+  }
+}
+$this -> view -> assign('sidebar1', $sidebar1);
+$sidebar2 = BaseModel::query('select * from sidebar where level = 2 and baseId = 1 order by id');
+
+for($i=0;$i<count($sidebar2);$i++)
+{
+  $id = $sidebar2[$i]['id'];
+  $item = BaseModel::query('select * from sidebar where level = 3 and pId = :id',['id'=>$id]);
+  $sidebar2[$i]['itemList'] = $item;
+  $sidebar2[$i]['span'] = '';
+  $sidebar2[$i]['class'] = 'nav-item';
+
+  $sidebar2[$i]['list'] = false;
+  if($sidebar2[$i]['name'] == "系统设置"){
+    $sidebar2[$i]['class'] = 'nav-item active';
+  }
+  if(count($item)!=0){
+    $sidebar2[$i]['list'] = true;
+    $sidebar2[$i]['span'] = '<span class="nav-pointer iconfont icon-play_fill"></span>';
+    $sidebar2[$i]['url'] = 'javascript:;';
+    for($j=0;$j<count($sidebar2[$i]['itemList']);$j++){
+      $sidebar2[$i]['itemList'][$j]['class'] = 'nav-item';
+      if($sidebar2[$i]['itemList'][$j]['name'] == "微信配置"){
+        $sidebar2[$i]['itemList'][$j]['class'] = 'nav-item active';
+      }
+    }
+  }
+
+}
+
+$this -> view -> assign('sidebar2', $sidebar2);
+$this -> view -> assign('active', 'wechatSetting');
+$this -> view -> assign('active', true);

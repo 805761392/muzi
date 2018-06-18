@@ -1,0 +1,108 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="./index.php?c=site&a=entry&op=list&do=sjrz&m=xfydm_wuzhe">
+                申请列表
+            </a>
+        </li>
+    </ul>
+    <div class="main">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                筛选
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form-horizontal" role="form" id="form1">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            商家名称
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input class="form-control" name="name" type="text" value="" placeholder="">
+                        </div>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="submit" class="btn btn-default" name="update" value="搜索">
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="category">
+            <div class="panel panel-default">
+                <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr style="text-align: center">
+                                <!--<th style="text-align: center;width:100px;">openid</th>-->
+                                <th style="text-align: center;width:200px;">
+                                    商家名称
+                                </th>
+                                <th style="text-align: center;width:100px;">
+                                    联系人
+                                </th>
+                                <th style="text-align: center;width:100px;">
+                                    联系方式
+                                </th>
+                                <th style="text-align: center;width:100px;">
+                                    状态
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function delplayer(id) {
+            var op = "del";
+            $.ajax({
+                type: "POST",
+                url: "./index.php?c=site&a=entry&do=del_sjrz&m=xfydm_wuzhe",
+                data: {
+                    id: id,
+                    op: op
+                },
+                success: function(data) {
+                    var res = eval("(" + data + ")");
+                    if (res.data == 1) {
+                        util.message('删除成功', location.href, 'success');
+                    } else {
+                        util.message('删除失败', location.href, 'error');
+                    }
+                }
+            },
+            'json');
+        }
+
+        function content(id) {
+            var op = "content";
+            $.ajax({
+                type: "POST",
+                url: "./index.php?c=site&a=entry&do=del_sjrz&m=xfydm_wuzhe",
+                data: {
+                    id: id,
+                    op: op
+                },
+                success: function(data) {
+                    var res = eval("(" + data + ")");
+                    if (res.data == 2) {
+                        util.message('操作成功', location.href, 'success');
+                    } else {
+                        util.message('操作失败', location.href, 'error');
+                    }
+                }
+            },
+            'json');
+        }
+    </script>
+</div>
+{/block}

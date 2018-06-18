@@ -1,0 +1,63 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>图片魔方</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fhome-block-edit">添加图片魔方</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>板块名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+                        <tr>
+                <td>4</td>
+                <td>拼团魔方</td>
+                <td>
+                    <a class="btn btn-sm btn-primary"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fhome-block-edit&id=4">编辑</a>
+                    <a class="btn btn-sm btn-danger delete-confirm"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fhome-block-delete&id=4">删除</a>
+                </td>
+            </tr>
+                </table>
+</div>
+</div>
+<script>
+$(document).on("click", ".delete-confirm", function () {
+    var url = $(this).attr("href");
+    $.confirm({
+        content: "确认删除？",
+        confirm: function () {
+            $.loading();
+            $.ajax({
+                url: url,
+                dataType: "json",
+                success: function (res) {
+                    if (res.code == 0) {
+                        location.reload();
+                    } else {
+                        $.loadingHide();
+                        $.alert({
+                            content: res.msg,
+                        });
+                    }
+                }
+            });
+        },
+    });
+    return false;
+});
+</script>    </div>
+</div>
+{/block}

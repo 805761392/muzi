@@ -1,0 +1,378 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="./index.php?c=site&a=entry&op=list&do=Business&m=xfydm_wuzhe">
+                商家出售统计
+            </a>
+        </li>
+    </ul>
+    <div class="main">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                统计
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" class="form-horizontal" role="form" id="form1">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            起止时间
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <script type="text/javascript">
+                                require(["daterangepicker"],
+                                function() {
+                                    $(function() {
+                                        $(".daterange.daterange-time").each(function() {
+                                            var elm = this;
+                                            $(this).daterangepicker({
+                                                startDate: $(elm).prev().prev().val(),
+                                                endDate: $(elm).prev().val(),
+                                                format: "YYYY-MM-DD HH:mm",
+                                                timePicker: true,
+                                                timePicker12Hour: false,
+                                                timePickerIncrement: 1,
+                                                minuteStep: 1
+                                            },
+                                            function(start, end) {
+                                                $(elm).find(".date-title").html(start.toDateTimeStr() + " 至 " + end.toDateTimeStr());
+                                                $(elm).prev().prev().val(start.toDateTimeStr());
+                                                $(elm).prev().val(end.toDateTimeStr());
+                                            });
+                                        });
+                                    });
+                                });
+                            </script>
+                            <input name="times[start]" type="hidden" value="2018-05-17 18:13" />
+                            <input name="times[end]" type="hidden" value="2018-07-16 18:13" />
+                            <button class="btn btn-default daterange daterange-time" type="button">
+                                <span class="date-title">
+                                    2018-05-17 18:13 至 2018-07-16 18:13
+                                </span>
+                                <i class="fa fa-calendar">
+                                </i>
+                            </button>
+                            <input class="form-control" name="shuaxin" type="text" value="1" style="display: none">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            订单号
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input class="form-control" name="orderid" type="text" value="" placeholder="支持模糊查询">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            商家名字
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input class="form-control" name="sname" type="text" value="" placeholder="支持模糊查询">
+                            <!--<select name="sid" class='form-control' id="col">-->
+                            <!--</select>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            特殊购买订单
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <select name="type" class='form-control' id="col">
+                                <option value="0">
+                                    全部类型
+                                </option>
+                                <option value="1">
+                                    限购订单
+                                </option>
+                                <option value="2">
+                                    限时购订单
+                                </option>
+                                <option value="3">
+                                    0元购订单
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">支付状态</label>
+                    <div class="col-sm-4 col-lg-4 col-xs-12">
+                    <select name="pay" class='form-control' id="col">
+                    <option value="0">无</option>
+                    <option value="1">未支付</option>
+                    <option value="2">已支付</option>
+                    </select>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">消费状态</label>
+                    <div class="col-sm-4 col-lg-4 col-xs-12">
+                    <select name="xf" class='form-control' id="col">
+                    <option value="0">无</option>
+                    <option value="1">未消费</option>
+                    <option value="2">已消费</option>
+                    </select>
+                    </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                        </label>
+                        <div class="col-sm-2 col-lg-2">
+                            <input type="submit" class="btn btn-default" name="update" value="搜索">
+                            <input type="hidden" name="token" value="ce5e2724" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                统计
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <!-- <form action="" method="post" class="form-horizontal" role="form"
+                    id="form1"> -->
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            起止时间
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12">
+                            <input name="yw_times[start]" type="hidden" value="2018-06-09 18:13" />
+                            <input name="yw_times[end]" type="hidden" value="2018-06-23 18:13" />
+                            <button class="btn btn-default daterange daterange-time" type="button">
+                                <span class="date-title">
+                                    2018-06-09 18:13 至 2018-06-23 18:13
+                                </span>
+                                <i class="fa fa-calendar">
+                                </i>
+                            </button>
+                        </div>
+                        <a href="javascript:void(0)" class="btn btn-default" onclick="yw_tj()">
+                            搜索
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                            累积销售：
+                        </label>
+                        <div class="col-sm-4 col-lg-4 col-xs-12 ljxs" style="height:34px;line-height:34px;">
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function yw_tj() {
+                var yw_time_s = $('input[name="yw_times[start]"]').val();
+                var yw_time_e = $('input[name="yw_times[end]"]').val();
+                // alert(yw_time_s)
+                // alert(yw_time_e)
+                $.post("./index.php?c=site&a=entry&do=business_tj&m=xfydm_wuzhe", {
+                    yw_time_s: yw_time_s,
+                    yw_time_e: yw_time_e
+                },
+                function(res) {
+                    // alert(res.data)
+                    if (res.data) {
+                        var new_data = res.data + "元";
+                        $(".ljxs").html(new_data);
+                    } else {
+                        alert("统计失败，请稍后再试");
+                    }
+                },
+                'json');
+            }
+        </script>
+        <div class="category">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    销售列表
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th style="text-align: center;width:200px;">
+                                    商家
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    用户昵称
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    用户头像
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    订单号
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    购买描述
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    购买单价
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    订单状态
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    支付状态
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    购买时间
+                                </th>
+                                <th style="text-align: center;width:200px;">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <td>
+                                    <div class="type-parent">
+                                        禄喜记
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        厚积薄发
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="__STATIC__/Picture/3bdef7a342a94c1dbc24469c0751f38d.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        2018061411454541797
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        重庆牛油火锅
+                                    </div>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        尚未使用
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="overflow:hidden;">
+                                        已支付
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="overflow:hidden;">
+                                        2018-06-14 11:45:45
+                                    </div>
+                                </td>
+                                <td style="text-align: center">
+                                    <!-- <a href="javascript:update(1868)">
+                                    <button class="btn btn-primary">核销使用</button>
+                                    </a>
+                                    -->
+                                    <a href="javascript:delplayer(1868)">
+                                        <button class="btn btn-danger">
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>
+                                    <div class="type-parent">
+                                        禄喜记
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        厚积薄发
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="__STATIC__/Picture/3bdef7a342a94c1dbc24469c0751f38d.gif" style="width:50px;height:50px;border-radius:50%; overflow:hidden;border:1px solid silver;">
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        2018061411435239816
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        重庆牛油火锅
+                                    </div>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <div class="type-parent">
+                                        尚未使用
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="overflow:hidden;">
+                                        已支付
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="type-parent" style="overflow:hidden;">
+                                        2018-06-14 11:43:52
+                                    </div>
+                                </td>
+                                <td style="text-align: center">
+                                    <!-- <a href="javascript:update(1866)">
+                                    <button class="btn btn-primary">核销使用</button>
+                                    </a>
+                                    -->
+                                    <a href="javascript:delplayer(1866)">
+                                        <button class="btn btn-danger">
+                                            删除
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function delplayer(id) {
+                var alt = confirm("删除订单！");
+                if (alt) {
+                    $.post("./index.php?c=site&a=entry&op=del&do=business&m=xfydm_wuzhe", {
+                        id: id
+                    },
+                    function(res) {
+                        if (res.data != 0) {
+                            util.message('操作失败, 请稍后重试.')
+                        } else {
+                            util.message('操作成功', location.href, 'success');
+                        }
+                    },
+                    'json');
+                }
+            }
+            function update(id) {
+                var alt = confirm("确认用户该订单已使用！");
+                if (alt) {
+                    $.post("./index.php?c=site&a=entry&op=update&do=business&m=xfydm_wuzhe", {
+                        id: id
+                    },
+                    function(res) {
+                        if (res.data != 0) {
+                            util.message('操作失败, 请稍后重试.')
+                        } else {
+                            util.message('操作成功', location.href, 'success');
+                        }
+                    },
+                    'json');
+                }
+            }
+        </script>
+    </div>
+</div>
+{/block}

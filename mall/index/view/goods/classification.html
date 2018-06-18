@@ -1,0 +1,117 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+
+<div class="panel mb-3">
+<div class="panel-header">
+    <span>商品分类</span>
+    <ul class="nav nav-right">
+        <li class="nav-item">
+            <a class="nav-link" href="http://wx.gxmuzi.com/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fcat-edit">添加分类</a>
+        </li>
+    </ul>
+</div>
+<div class="panel-body">
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>分类名称</th>
+            <th>图标</th>
+            <th>排序</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+                        <tr class="nav-item1">
+                <td>
+                                            <span>46</span>
+                </td>
+                <td>HEY卡</td>
+                <td>
+                                                <img src="Picture/7d9d6acca63e08e0dcd95203c5e2bba4.png"
+                             style="width: 20px;height: 20px;">
+                                        </td>
+                <td>100</td>
+                <td>
+
+                    <a class="btn btn-sm btn-primary"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fcat-edit&id=46">修改</a>
+                    <a class="btn btn-sm btn-primary copy" data-clipboard-text="/pages/cat/cat"
+                       href="javascript:" hidden>复制链接</a>
+                    <a class="btn btn-sm btn-danger del"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fcat-del&id=46">删除</a>
+                </td>
+            </tr>
+                                        <tr class="nav-item1">
+                <td>
+                                            <span>45</span>
+                </td>
+                <td>电信业务</td>
+                <td>
+                                                <img src="Picture/23fef19e418daeee0f1ff83ff4f5336c.png"
+                             style="width: 20px;height: 20px;">
+                                        </td>
+                <td>100</td>
+                <td>
+
+                    <a class="btn btn-sm btn-primary"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fcat-edit&id=45">修改</a>
+                    <a class="btn btn-sm btn-primary copy" data-clipboard-text="/pages/cat/cat"
+                       href="javascript:" hidden>复制链接</a>
+                    <a class="btn btn-sm btn-danger del"
+                       href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fstore%2Fcat-del&id=45">删除</a>
+                </td>
+            </tr>
+                                    </tbody>
+
+    </table>
+</div>
+</div>
+
+<script>
+$(document).on('click', '.nav-item1', function () {
+    if($(this).find(".trans")[0].style.display=='inline-block'){
+        $(this).find(".trans")[0].style.display='inline';
+    }else{
+        $(this).find(".trans")[0].style.display='inline-block';
+    }
+    $('.bg-'+$(this).index(".nav-item1")).toggle();
+});
+$(document).on('click', '.del', function () {
+    if (confirm("是否删除？")) {
+        $.ajax({
+            url: $(this).attr('href'),
+            type: 'get',
+            dataType: 'json',
+            success: function (res) {
+                alert(res.msg);
+                if (res.code == 0) {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+    return false;
+});
+</script>
+<script>
+$(document).ready(function () {
+    var clipboard = new Clipboard('.copy');
+    clipboard.on('success', function (e) {
+        $.myAlert({
+            title: '提示',
+            content: '复制成功'
+        });
+    });
+    clipboard.on('error', function (e) {
+        $.myAlert({
+            title: '提示',
+            content: '复制失败，请手动复制。链接为：' + e.text
+        });
+    });
+})
+</script>    </div>
+</div>
+
+{/block}

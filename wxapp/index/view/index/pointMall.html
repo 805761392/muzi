@@ -1,0 +1,171 @@
+{extend name='index/base' /}
+{block name='content'}
+<div class="right-content">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="./index.php?c=site&a=entry&op=shop_cate&do=integral&m=xfydm_wuzhe">
+                商品分类
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=shop&do=integral&m=xfydm_wuzhe">
+                商品管理
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=order&do=integral&m=xfydm_wuzhe">
+                订单管理
+            </a>
+        </li>
+        <li>
+            <a href="./index.php?c=site&a=entry&op=index&do=integral&m=xfydm_wuzhe">
+                首页设置
+            </a>
+        </li>
+    </ul>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            添加分类
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" action="" method="POST">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                        分类名称
+                    </label>
+                    <div class="col-sm-6 col-lg-6 col-xs-12">
+                        <input class="form-control link_id" name="name" type="text" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                        分类图片
+                    </label>
+                    <div class="col-sm-6 col-lg-6 col-xs-12">
+                        <script type="text/javascript">
+                            function showImageDialog(elm, opts, options) {
+                                require(["util"],
+                                function(util) {
+                                    var btn = $(elm);
+                                    var ipt = btn.parent().prev();
+                                    var val = ipt.val();
+                                    var img = ipt.parent().next().children();
+                                    options = {
+                                        'global': false,
+                                        'class_extra': '',
+                                        'direct': true,
+                                        'multiple': false,
+                                        'fileSizeLimit': 2097152
+                                    };
+                                    util.image(val,
+                                    function(url) {
+                                        if (url.url) {
+                                            if (img.length > 0) {
+                                                img.get(0).src = url.url;
+                                            }
+                                            ipt.val(url.attachment);
+                                            ipt.attr("filename", url.filename);
+                                            ipt.attr("url", url.url);
+                                        }
+                                        if (url.media_id) {
+                                            if (img.length > 0) {
+                                                img.get(0).src = "";
+                                            }
+                                            ipt.val(url.media_id);
+                                        }
+                                    },
+                                    options);
+                                });
+                            }
+                            function deleteImage(elm) {
+                                $(elm).prev().attr("src", "./resource/images/nopic.jpg");
+                                $(elm).parent().prev().find("input").val("");
+                            }
+                        </script>
+                        <div class="input-group ">
+                            <input type="text" name="pic" value="" class="form-control" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="showImageDialog(this);">
+                                    选择图片
+                                </button>
+                            </span>
+                        </div>
+                        <div class="input-group " style="margin-top:.5em;">
+                            <img src="__STATIC__/Picture/nopic.jpg" onerror=""
+                            class="img-responsive img-thumbnail" width="150" />
+                            <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片"
+                            onclick="deleteImage(this)">
+                                ×
+                            </em>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                        优先级
+                    </label>
+                    <div class="col-sm-6 col-lg-6 col-xs-12">
+                        <input class="form-control link_id" name="priority" type="text" value=""
+                        placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-1 col-md-1 col-lg-1 control-label">
+                        是否显示
+                    </label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input class="link_type" name="status" type="radio" value="1">
+                            显示
+                        </label>
+                        <label class="radio-inline">
+                            <input class="link_type" name="status" type="radio" value="2">
+                            隐藏
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <input type="submit" class="btn btn-default" name="insert" value="添加">
+                        <input type="hidden" name="token" value="ce5e2724" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="main">
+        <div class="category">
+            <div class="panel panel-default">
+                <div class="panel-body table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;width:180px;">
+                                    分类名称
+                                </th>
+                                <th style="text-align: center;width:150px;">
+                                    分类图片
+                                </th>
+                                <th style="text-align: center;width:150px;">
+                                    优先级
+                                </th>
+                                <th style="text-align: center;width: 160px">
+                                    是否显示
+                                </th>
+                                <th style="text-align: center;width: 160px">
+                                    添加时间
+                                </th>
+                                <th style="text-align: center;width: 160px">
+                                    操作
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

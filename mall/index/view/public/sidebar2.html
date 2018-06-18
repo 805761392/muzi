@@ -1,0 +1,32 @@
+
+<div class="sidebar sidebar-sub" id="sidebar">
+<div class="sidebar-1">
+<div class="logo">
+<a class="home-link" href="/mall.php/">HEY折扣商家</a>
+</div>
+<div>
+{volist name='sidebar1' id='vo'}
+   <a class="{$vo.class}" href="{$vo.url}" > <span class="nav-icon iconfont icon-setup"></span> <span>{$vo.name}</span></a>
+{/volist}
+</div>
+</div>
+<div class="sidebar-2">
+<div class="current-menu-name" id="current-menu-name">{$baseName}</div>
+
+
+<div class="sidebar-content">
+{volist name='sidebar2' id='vo'}
+{if $vo.itemList}
+  <a class="{$vo.class}" href="javascript:;" ><span class="nav-pointer iconfont icon-play_fill"></span><span>{$vo.name}</span></a>
+  <div class="sub-item-list">
+    {volist name='vo.itemList' id='v'}
+    <a class="{$v.class}" href="{$v.url}"> <span>{$v.name}</span> </a>
+    {/volist}
+  </div>
+{else /}
+  <a class="{$vo.class}" href="{$vo.url}" ><span>{$vo.name}</span></a>
+{/if}
+{/volist}
+</div>
+</div>
+</div>

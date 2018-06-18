@@ -1,0 +1,106 @@
+{extend name='public/base2' /}
+{block name='content'}
+<div class="main-body">
+    <div class="panel mb-3">
+<div class="panel-header">会员等级</div>
+<div class="panel-body">
+    <a class="btn btn-primary" href="/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Flevel-edit">会员设置</a>
+    <div class="float-right mb-4">
+        <form method="get">
+
+                                                <input type="hidden" name="r" value="mch/user/level">
+
+            <div class="input-group">
+                <input class="form-control"
+                       placeholder="会员等级"
+                       name="keyword"
+                       autocomplete="off"
+                       value="">
+                <span class="input-group-btn">
+                <button class="btn btn-primary">搜索</button>
+            </span>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered bg-white">
+        <tr>
+            <td>等级</td>
+            <td>等级名称</td>
+            <td>折扣</td>
+            <td>购买所需金额</td>
+            <td>升级条件</td>
+            <td>状态</td>
+            <td>操作</td>
+        </tr>
+                </table>
+    <div class="text-center">
+                    <div class="text-muted">0条数据</div>
+    </div>
+</div>
+</div>
+<script>
+$(document).on('click', '.status', function () {
+    var type = $(this).data('type');
+    var id = $(this).data('id');
+    var text = '';
+    if (type == 0) {
+        text = "禁用";
+    } else {
+        text = "启用";
+    }
+    $.myConfirm({
+        title: '提示',
+        content: '是否' + text + '？',
+        confirm: function () {
+            $.ajax({
+                url: "/addons/zjhj_mall/core/web/index.php?r=mch%2Fuser%2Flevel-type",
+                dataType: 'json',
+                type: 'get',
+                data: {
+                    type: type,
+                    id: id
+                },
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.myAlert({
+                            title: '提示',
+                            content: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+<script>
+$(document).on('click', '.del', function () {
+    var a = $(this);
+    $.myConfirm({
+        title: '提示',
+        content: a.data('content'),
+        confirm: function () {
+            $.ajax({
+                url: a.data('url'),
+                dataType: 'json',
+                type: 'get',
+                success: function (res) {
+                    if (res.code == 0) {
+                        window.location.reload();
+                    } else {
+                        $.myAlert({
+                            title: '提示',
+                            content: res.msg
+                        });
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+</div>
+</div>
+{/block}
